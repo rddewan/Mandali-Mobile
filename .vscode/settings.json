@@ -41,8 +41,8 @@
     {"column":   8, "color": "#5a5a5a20"},
     {"column":  10, "color": "#5a5a5a20"},
     {"column":  40, "color": "#5a5a5a20"}, // center line
-    {"column":  79, "color": "#5a5a5a20"}, // right rule minus one
-    {"column":  80, "color": "#5a5a5a20"}, // right rule
+    {"column":  79, "color": "#df6060f1"}, // right rule minus one
+    {"column":  80, "color": "#e22d2dc8"}, // right rule
     {"column": 120, "color": "#5a5a5a40"}  // extra right rule
 ],
 "yaml.schemaStore.enable": false,
