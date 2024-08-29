@@ -1,0 +1,67 @@
+name: mandali
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  account:
+    path: ./packages/account
+  analytic:
+    path: ./packages/analytic
+  common: 
+    path: ./packages/common
+  core: 
+    path: ./packages/core
+  church: 
+    path: ./packages/church
+  dashboard: 
+    path: ./packages/dashboard
+  firebase_authentication:
+    path: ./packages/firebase_authentication
+  home: 
+    path: ./packages/home
+  setting:
+    path: ./packages/setting
+  member: 
+    path: ./packages/member
+  
+
+  flutter_riverpod: any
+  go_router: any
+  flutter_local_notifications: any
+  dio: any
+  logging: any
+  firebase_core: any
+  firebase_messaging: any
+  riverpod_annotation: any
+  timezone: any
+  firebase_crashlytics: any
+  flutter_styled_toast: any
+  loader_overlay: any
+  upgrader: any
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.11
+  envied_generator: ^0.5.4+1
+  retrofit_generator: '>=8.1.2'
+  json_serializable: '^6.8.0'
+  freezed: ^2.5.7
+  riverpod_generator: ^2.4.2
+  riverpod_lint: ^2.3.12
+  custom_lint: ^0.6.4
+
+dependency_overrides: 
+  meta: 1.15.0
+
+flutter:
+  assets:
+    - shorebird.yaml
+  uses-material-design: true

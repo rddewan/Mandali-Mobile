@@ -1,0 +1,1 @@
+enum ChurchServiceType { sunday, cottage }

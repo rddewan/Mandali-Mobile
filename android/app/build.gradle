@@ -1,0 +1,162 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader("UTF-8") { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty("flutter.versionCode")
+if (flutterVersionCode == null) {
+    flutterVersionCode = "1"
+}
+
+def flutterVersionName = localProperties.getProperty("flutter.versionName")
+if (flutterVersionName == null) {
+    flutterVersionName = "1.0"
+}
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withReader('UTF-8') { reader ->
+        keystoreProperties.load(reader)
+    }
+}
+
+def flutterCompileSdkVersion = localProperties.getProperty('flutter.compileSdkVersion')
+if (flutterCompileSdkVersion == null) {
+    flutterCompileSdkVersion = 34
+}
+
+def flutterMinSdkVersion = localProperties.getProperty('flutter.minSdkVersion')
+if (flutterMinSdkVersion == null) {
+    flutterMinSdkVersion = 25
+}
+
+def flutterTargetSdkVersion = localProperties.getProperty('flutter.targetSdkVersion')
+if (flutterTargetSdkVersion == null) {
+    flutterTargetSdkVersion = 34
+}
+
+android {
+    namespace = "in.wecancode.mandali"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {        
+        applicationId = "in.wecancode.mandali"
+        minSdkVersion flutterMinSdkVersion.toInteger()
+        targetSdkVersion flutterTargetSdkVersion.toInteger()
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+    }
+
+    signingConfigs {
+        debug {
+            if (System.getenv()["CI"]) {
+                storeFile file(System.getenv()["CM_KEYSTORE_PATH"])
+                storePassword System.getenv()["CM_KEYSTORE_PASSWORD"]
+                keyAlias System.getenv()["CM_KEY_ALIAS"]
+                keyPassword System.getenv()["CM_KEY_PASSWORD"]
+            }
+            else {
+                keyAlias keystoreProperties['dev.keyAlias']
+                keyPassword keystoreProperties['dev.keyPassword']
+                storeFile keystoreProperties['dev.storeFile'] ? file(keystoreProperties['dev.storeFile']) : null
+                storePassword keystoreProperties['dev.storePassword']
+            }
+
+        }
+        qa {
+            if (System.getenv()["CI"]) {
+                storeFile file(System.getenv()["CM_KEYSTORE_PATH"])
+                storePassword System.getenv()["CM_KEYSTORE_PASSWORD"]
+                keyAlias System.getenv()["CM_KEY_ALIAS"]
+                keyPassword System.getenv()["FCI_KEY_PASSWORD"]
+            }
+            else {
+                keyAlias keystoreProperties['qa.keyAlias']
+                keyPassword keystoreProperties['qa.keyPassword']
+                storeFile keystoreProperties['qa.storeFile'] ? file(keystoreProperties['qa.storeFile']) : null
+                storePassword keystoreProperties['qa.storePassword']
+            }
+
+        }        
+        release {
+            if (System.getenv()["CI"]) {
+                storeFile file(System.getenv()["CM_KEYSTORE_PATH"])
+                storePassword System.getenv()["CM_KEYSTORE_PASSWORD"]
+                keyAlias System.getenv()["CM_KEY_ALIAS"]
+                keyPassword System.getenv()["CM_KEY_PASSWORD"]
+            }
+            else {
+                keyAlias keystoreProperties['prod.keyAlias']
+                keyPassword keystoreProperties['prod.keyPassword']
+                storeFile keystoreProperties['prod.storeFile'] ? file(keystoreProperties['prod.storeFile']) : null
+                storePassword keystoreProperties['prod.storePassword']
+            }
+
+        }
+    }
+
+    flavorDimensions "flavor"
+
+    productFlavors {
+        dev {
+            dimension "flavor"
+            applicationId "in.wecancode.mandali"
+            applicationIdSuffix ".dev"
+            //versionNameSuffix " Dev"
+            signingConfig signingConfigs.debug            
+        }
+        qa {
+            dimension "flavor"
+            applicationId "in.wecancode.mandali"
+            applicationIdSuffix ".qa"
+            //versionNameSuffix " QA"
+            signingConfig signingConfigs.qa            
+        }
+        prod {
+            dimension "flavor"
+            applicationId "in.wecancode.mandali"
+            signingConfig signingConfigs.release           
+        }
+    }
+
+
+    buildTypes {
+        debug {           
+            signingConfig signingConfigs.debug
+        }
+        release {           
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+flutter {
+    source = "../.."
+}

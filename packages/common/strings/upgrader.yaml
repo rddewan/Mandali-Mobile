@@ -1,0 +1,8 @@
+
+message: A new version of {{appName}} is now available. Your current version is ({{currentInstalledVersion}}) and the latest version is ({{currentAppStoreVersion}}).'
+buttonTitleIgnore: Ignore
+buttonTitleLater: Later
+buttonTitleUpdate: Update Now
+prompt: Want to update?
+releaseNotes: Release Notes
+title: Update App?

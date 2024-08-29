@@ -1,0 +1,17 @@
+auth:
+  $ref: auth.yaml
+home:
+  $ref: home.yaml
+setting:
+  $ref: setting.yaml
+account:
+  $ref: account.yaml
+drawer:
+  $ref: drawer.yaml
+bottombar:
+  $ref: bottombar.yaml
+upgrader:
+  $ref: upgrader.yaml
+
+appName: Mandali
+ok: OK

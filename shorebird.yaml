@@ -1,0 +1,18 @@
+# This file is used to configure the Shorebird updater used by your app.
+# Learn more at https://docs.shorebird.dev
+# This file does not contain any sensitive information and should be checked into version control.
+
+# Your app_id is the unique identifier assigned to your app.
+# It is used to identify your app when requesting patches from Shorebird's servers.
+# It is not a secret and can be shared publicly.
+app_id: f3aa305b-b1d7-4f23-9e11-cdc6500bc606
+flavors:
+  dev: f3aa305b-b1d7-4f23-9e11-cdc6500bc606
+  prod: 3c28b26f-c859-4bc2-9a6c-4bc386872090
+  qa: adc5808b-e5aa-434e-b273-16660ba2dfa7
+
+# auto_update controls if Shorebird should automatically update in the background on launch.
+# If auto_update: false, you will need to use package:shorebird_code_push to trigger updates.
+# https://pub.dev/packages/shorebird_code_push
+# Uncomment the following line to disable automatic updates.
+# auto_update: false

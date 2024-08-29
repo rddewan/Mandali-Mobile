@@ -1,0 +1,19 @@
+
+title: Account
+deleteMyAccount: Delete My Account
+delete: Delete
+deleteAccount: Delete Account
+deleteAccountTitle: Deleting your account will remove your access and all your information on this site including your payment and purchase history.
+deleteAccountSubTitle: Delete your account permanemtly
+deleteDialogTitle: Delete !
+deleteDialogSubTitle: Do you really want to delete your account?
+btnYes: Yes
+btnNo: No
+btnOk: Ok
+deleteAccountSuccessTitle: Deleted
+deleteAccountSuccessMsg: Your account has been deleted successfully.
+editProfile: Edit Profile
+name: Name
+pleaseInputYourName: Please input your name
+update: Update
+signOut: Sign Out

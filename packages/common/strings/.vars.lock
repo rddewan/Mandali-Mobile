@@ -1,0 +1,4 @@
+upgrader.message:
+  0: appName
+  1: currentInstalledVersion
+  2: currentAppStoreVersion

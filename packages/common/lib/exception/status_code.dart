@@ -1,0 +1,13 @@
+const int success = 200;
+const int created = 201;
+const int noContent = 204;
+const int badRequest = 400;
+const int unauthorized = 401;
+const int forbidden = 403;
+const int notFound = 404;
+const int internalServerError = 500;
+const int conflict = 409;
+const int tooManyRequests = 429;
+const int unknownError = 0;
+const int refreshTokenExpired = 498;
+const int invalidToken = 403;

@@ -1,0 +1,25 @@
+targets:
+  $default:
+    builders:
+      freezed:
+        generate_for:
+            - "lib/model**/*.dart"
+            - "lib/dto**/*.dart"
+  
+      json_serializable:
+        generate_for:
+          include:
+            - "lib/model**/*.dart"
+            - "lib/dto**/*.dart"
+
+      riverpod_generator:
+        generate_for:
+          include:
+            - "lib/providers**/*.dart"
+
+      # go_router_builder:
+      #   generate_for:
+      #     include:
+      #       - "lib/core/routes.dart"
+      #     exclude:
+      #      - "lib/features/**.dart"
