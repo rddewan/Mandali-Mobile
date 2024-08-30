@@ -64,9 +64,11 @@ definitions:
     
     - &get_flutter_translation_files
       name: Get Flutter Translation Files
-      script: |       
+      script: |      
+        cd packages/common 
         echo Fetching translation data        
         dart run flutter_translation_sheet:main fetch
+        cd ../../
         echo Done fetching translation data   
 
     - &get_dependencies
