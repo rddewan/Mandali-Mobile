@@ -118,6 +118,7 @@ workflows:
         - firebase_credentials
         - google_credentials
         - email_recipients
+        - shorebird_credentials
       vars:
         PACKAGE_NAME: "in.wecancode.mandali.dev"
       android_signing:
@@ -217,6 +218,7 @@ workflows:
         - firebase_credentials
         - google_credentials
         - email_recipients
+        - shorebird_credentials
       vars:
         PACKAGE_NAME: "in.wecancode.mandali.qa"
         APP_STORE_APPLE_ID: 1642472180
@@ -349,6 +351,7 @@ workflows:
         - firebase_credentials
         - google_credentials
         - email_recipients
+        - shorebird_credentials
       vars:
         PACKAGE_NAME: "in.wecancode.mandali"
         APP_STORE_APPLE_ID: 6444429146
