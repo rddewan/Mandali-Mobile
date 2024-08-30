@@ -69,7 +69,12 @@ definitions:
         echo Fetching translation data        
         dart run flutter_translation_sheet:main fetch
         cd ../../
-        echo Done fetching translation data   
+        echo Done fetching translation data  
+
+    - &build_runner
+      name: Run build_runner
+      script: |
+        ./run_build_runner.sh 
 
     - &get_dependencies
       name: Get the dependencies
@@ -147,6 +152,8 @@ workflows:
       - *setup_translation_credentials
 
       - *get_flutter_translation_files
+
+      - *build_runner
 
       - *get_dependencies
 
@@ -250,6 +257,8 @@ workflows:
       - *setup_translation_credentials
 
       - *get_flutter_translation_files
+
+      - *build_runner
 
       - *get_dependencies
 
@@ -378,6 +387,8 @@ workflows:
       - *setup_translation_credentials
 
       - *get_flutter_translation_files
+
+      - *build_runner
 
       - *get_dependencies
 
