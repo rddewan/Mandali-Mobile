@@ -1,6 +1,16 @@
 # Mandali
 Church Management System - Open Source Project.
 
+### Git Branching
+
+| Environment | Git Branch  |
+| ----------- | ----------- |
+| Production  | main        |
+| Staging     | qa          |
+| Development | dev         |
+| Hotfix      | hotfix      | 
+| Patch       | patch       |
+
 ### Setup Flutter Version Management
 - Run below command to setup flutter version
 - Current version for this project is 3.22.2
