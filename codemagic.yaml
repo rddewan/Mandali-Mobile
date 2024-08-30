@@ -279,7 +279,7 @@ workflows:
 
       - name: Flutter Build iOS Release
         script: |
-          shorebird release ios \
+          flutter build ipa \
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
           --flavor qa -t lib/main_qa.dart \
