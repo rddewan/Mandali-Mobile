@@ -143,6 +143,8 @@ workflows:
 
       - *setup_local_and_key_properties
 
+      - *shorebird_install
+
       - *setup_env
 
       - *setup_ios_firebase_googleService
@@ -245,6 +247,8 @@ workflows:
       - *setup_code_signing_on_xcode_project
 
       - *setup_local_and_key_properties
+
+      - *shorebird_install
 
       - *setup_env
 
@@ -373,6 +377,8 @@ workflows:
       - *setup_code_signing_on_xcode_project
 
       - *setup_local_and_key_properties
+
+      - *shorebird_install
 
       - *setup_env
 
