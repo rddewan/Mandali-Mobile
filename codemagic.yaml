@@ -64,10 +64,17 @@ definitions:
     
     - &get_flutter_translation_files
       name: Get Flutter Translation Files
-      script: |       
+      script: |      
+        cd packages/common 
         echo Fetching translation data        
         dart run flutter_translation_sheet:main fetch
-        echo Done fetching translation data   
+        cd ../../
+        echo Done fetching translation data  
+
+    - &build_runner
+      name: Run build_runner
+      script: |
+        ./run_build_runner.sh 
 
     - &get_dependencies
       name: Get the dependencies
@@ -376,8 +383,6 @@ workflows:
       - *setup_translation_credentials
 
       - *get_flutter_translation_files
-
-      - *get_dependencies
 
       - *flutter_analyze
       

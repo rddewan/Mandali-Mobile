@@ -4,12 +4,19 @@
 run_flutter_commands() {
   cd "$1"
   echo "Entering directory: $1"
-  fvm flutter pub get > /dev/null 2>&1
+  flutter pub get
+  dart pub run build_runner clean
   # Redirect stdout and stderr from build_runner to /dev/null to hide the output
-  fvm flutter pub run build_runner build -d 
+  dart pub run build_runner build -d 
   cd "$OLDPWD"  # Return to the previous directory
   echo "Exiting directory: $1"
 }
+
+
+# Run build_runner in the roort directory
+flutter pub get
+dart pub run build_runner clean
+dart pub run build_runner build -d 
 
 # Root directory of your Flutter project
 project_root="."
@@ -43,9 +50,5 @@ done
 
 # Return to the project root directory
 cd "$project_root"
-
-# Run Flutter pub get for the entire project, and hide its output
-fvm flutter pub get > /dev/null 2>&1
-fvm flutter pub run build_runner build -d > /dev/null 2>&1
 
 echo "Script execution complete."
