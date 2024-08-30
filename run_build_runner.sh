@@ -4,7 +4,7 @@
 run_flutter_commands() {
   cd "$1"
   echo "Entering directory: $1"
-  
+  flutter pub get
   dart pub run build_runner clean
   # Redirect stdout and stderr from build_runner to /dev/null to hide the output
   dart pub run build_runner build -d 
@@ -14,6 +14,7 @@ run_flutter_commands() {
 
 
 # Run build_runner in the roort directory
+flutter pub get
 dart pub run build_runner clean
 dart pub run build_runner build -d 
 
