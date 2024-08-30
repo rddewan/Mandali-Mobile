@@ -1,6 +1,16 @@
 # Mandali
 Church Management System - Open Source Project.
 
+### Build Status
+| Environment | Git Branch  |
+| ----------- | ----------- |
+| Production  | [![Codemagic build status](https://api.codemagic.io/apps/66ce7c73fc5151e0782347a3/android_ios_build_prod/status_badge.svg)](https://codemagic.io/app/<app-id>/<workflow-id>/latest_build)         |
+| Staging     | [![Codemagic build status](https://api.codemagic.io/apps/66ce7c73fc5151e0782347a3/android_ios_build_qa/status_badge.svg)](https://codemagic.io/app/<app-id>/<workflow-id>/latest_build)           |
+| Development | [![Codemagic build status](https://api.codemagic.io/apps/66ce7c73fc5151e0782347a3/android_ios_build_dev/status_badge.svg)](https://codemagic.io/app/<app-id>/<workflow-id>/latest_build) |
+| Hotfix      | -      | 
+| Patch       | -       |
+
+
 ### Git Branching
 
 | Environment | Git Branch  |
