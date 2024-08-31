@@ -272,11 +272,10 @@ workflows:
       
       - name: Flutter build android release
         script: |          
-          shorebird release android \
+          shorebird release android --artifact apk \
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
           --flavor qa -t lib/main_qa.dart
-          --artifact ap
 
       - name: Flutter Build iOS Release
         script: |
