@@ -65,7 +65,7 @@ definitions:
     - &get_flutter_translation_files
       name: Get Flutter Translation Files
       script: |      
-        cd packages/common 
+        cd packages/common
         echo Fetching translation data        
         dart run flutter_translation_sheet:main fetch
         cd ../../
@@ -132,8 +132,8 @@ workflows:
         - $HOME/Library/Caches/CocoaPods
         - $FLUTTER_ROOT/.pub-cache
     triggering:
-      events:
-        - pull_request
+      #events:
+        #- pull_request
       #branch_patterns:
         #- pattern: dev
           #include: true # This will ensure that the build runs on the proposed code changes within the feature branch when pull request is created or updated.
@@ -282,8 +282,8 @@ workflows:
           shorebird release ios \
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
-          --flavor qa -t lib/main_qa.dart
-          
+          --flavor qa -t lib/main_qa.dart \
+          -- --export-options-plist=$HOME/export_options.plist
 
 
     artifacts:      
@@ -411,7 +411,8 @@ workflows:
           flutter build ipa --release \
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
-          --flavor prod -t lib/main_prod.dart          
+          --flavor prod -t lib/main_prod.dart \
+          -- --export-options-plist=$HOME/export_options.plist
 
 
     artifacts:      
