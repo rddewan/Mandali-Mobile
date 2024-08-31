@@ -66,10 +66,19 @@ definitions:
       name: Get Flutter Translation Files
       script: |      
         cd packages/common 
+      script: |      
+        cd packages/common 
         echo Fetching translation data        
         dart run flutter_translation_sheet:main fetch
         cd ../../
         echo Done fetching translation data  
+        cd ../../
+        echo Done fetching translation data  
+
+    - &build_runner
+      name: Run build_runner
+      script: |
+        ./run_build_runner.sh 
 
     - &build_runner
       name: Run build_runner
@@ -119,6 +128,7 @@ workflows:
         - google_credentials
         - email_recipients
         - shorebird_credentials
+        - shorebird_credentials
       vars:
         PACKAGE_NAME: "in.wecancode.mandali.dev"
       android_signing:
@@ -143,6 +153,8 @@ workflows:
       - *setup_code_signing_on_xcode_project
 
       - *setup_local_and_key_properties
+
+      - *shorebird_install
 
       - *shorebird_install
 
@@ -219,6 +231,7 @@ workflows:
         - google_credentials
         - email_recipients
         - shorebird_credentials
+        - shorebird_credentials
       vars:
         PACKAGE_NAME: "in.wecancode.mandali.qa"
         APP_STORE_APPLE_ID: 1642472180
@@ -249,6 +262,8 @@ workflows:
       - *setup_code_signing_on_xcode_project
 
       - *setup_local_and_key_properties
+
+      - *shorebird_install
 
       - *shorebird_install
 
@@ -352,6 +367,7 @@ workflows:
         - google_credentials
         - email_recipients
         - shorebird_credentials
+        - shorebird_credentials
       vars:
         PACKAGE_NAME: "in.wecancode.mandali"
         APP_STORE_APPLE_ID: 6444429146
@@ -380,6 +396,8 @@ workflows:
       - *setup_code_signing_on_xcode_project
 
       - *setup_local_and_key_properties
+
+      - *shorebird_install
 
       - *shorebird_install
 
