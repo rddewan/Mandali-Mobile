@@ -282,8 +282,8 @@ workflows:
           shorebird release ios \
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
-          --flavor qa -t lib/main_qa.dart \
-          --export-options-plist=$HOME/export_options.plist
+          --flavor qa -t lib/main_qa.dart
+          
 
 
     artifacts:      
@@ -411,8 +411,7 @@ workflows:
           flutter build ipa --release \
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
-          --flavor prod -t lib/main_prod.dart \
-          --export-options-plist=$HOME/export_options.plist
+          --flavor prod -t lib/main_prod.dart          
 
 
     artifacts:      
