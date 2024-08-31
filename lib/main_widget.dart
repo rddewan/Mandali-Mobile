@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:analytic/analytic.dart';
 import 'package:common/common.dart';
 import 'package:common/i18n/translations.dart';
@@ -62,7 +64,14 @@ class _MainWidgetState extends ConsumerState<MainWidget> {
           return UpgradeAlert(
             shouldPopScope: () => true,
             navigatorKey: router.routerDelegate.navigatorKey,
-            upgrader: Upgrader(messages: UpgraderTranslationMessages()),
+            dialogStyle: Platform.isIOS
+                ? UpgradeDialogStyle.cupertino
+                : UpgradeDialogStyle.material,
+            upgrader: Upgrader(
+              messages: UpgraderTranslationMessages(
+                code: setting?.language ?? 'en',
+              ),
+            ),
             child: LoaderOverlay(
               useDefaultLoading: false,
               overlayColor: Colors.transparent,
