@@ -15,11 +15,11 @@ definitions:
     - &setup_env
       name: Set up env
       script: | 
-        echo $ENV_DEV  > $CM_BUILD_DIR/packages/core/.dev.env  
+        echo $ENV_DEV | base64 --decode > $CM_BUILD_DIR/packages/core/.dev.env  
         cat $CM_BUILD_DIR/packages/core/.dev.env  
-        echo $ENV_QA > $CM_BUILD_DIR/packages/core/.qa.env
+        echo $ENV_QA | base64 --decode > $CM_BUILD_DIR/packages/core/.qa.env
         cat $CM_BUILD_DIR/packages/core/.qa.env
-        echo $ENV_PROD > $CM_BUILD_DIR/packages/core/.prod.env 
+        echo $ENV_PROD | base64 --decode > $CM_BUILD_DIR/packages/core/.prod.env 
         cat $CM_BUILD_DIR/packages/core/.prod.env 
 
     - &setup_translation_credentials
@@ -76,10 +76,10 @@ definitions:
 
     - &build_runner
       name: Run build_runner
-      script: |
+      script: |        
         cd packages/core
         pwd
-
+        
         echo Getting dependencies
         flutter pub get > /dev/null
 
@@ -142,11 +142,11 @@ workflows:
       ios_signing:
         distribution_type: development # app_store | ad_hoc | development | enterprise
         bundle_identifier: in.wecancode.mandali.dev 
-    cache:
-      cache_paths:
-        - $HOME/.gradle/caches
-        - $HOME/Library/Caches/CocoaPods
-        - $FLUTTER_ROOT/.pub-cache
+    # cache:
+    #   cache_paths:
+    #     - $HOME/.gradle/caches
+    #     - $HOME/Library/Caches/CocoaPods
+    #     - $FLUTTER_ROOT/.pub-cache
     triggering:
       events:
         - pull_request
