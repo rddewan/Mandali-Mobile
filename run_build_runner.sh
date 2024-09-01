@@ -13,7 +13,7 @@ run_flutter_commands() {
 }
 
 
-# Run build_runner in the roort directory
+# Run build_runner in the root directory
 flutter pub get
 dart pub run build_runner clean
 dart pub run build_runner build -d 
@@ -49,6 +49,13 @@ for package_dir in "$packages_dir"/*/; do
 done
 
 # Return to the project root directory
+cd "$project_root"
+
+# Run build_runner in the package/account directory as it depends on generated file from package/common
+cd $packages_dir/account
+dart pub run build_runner clean
+dart pub run build_runner build -d
+
 cd "$project_root"
 
 echo "Script execution complete."

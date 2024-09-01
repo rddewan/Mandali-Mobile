@@ -156,7 +156,7 @@ workflows:
 
       - *get_flutter_translation_files
 
-      - *get_dependencies
+      - *build_runner
 
       - *flutter_analyze
       
@@ -262,7 +262,7 @@ workflows:
 
       - *get_flutter_translation_files
 
-      - *get_dependencies
+      - *build_runner
 
       - *flutter_analyze
       
@@ -392,6 +392,8 @@ workflows:
       - *setup_translation_credentials
 
       - *get_flutter_translation_files
+
+      - *build_runner
 
       - *flutter_analyze
       
