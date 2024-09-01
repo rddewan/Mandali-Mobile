@@ -78,6 +78,7 @@ definitions:
       name: Run build_runner
       script: |
         cd packages/core
+        pwd
 
         echo Getting dependencies
         flutter pub get > /dev/null
@@ -88,7 +89,8 @@ definitions:
         flutter pub get > /dev/null
 
         echo Done running build_runner. Navigating up to root directory
-        cd ../../        
+        cd ../../    
+        flutter pub get > /dev/null    
 
     - &get_dependencies
       name: Get the dependencies
@@ -151,7 +153,7 @@ workflows:
       branch_patterns:
         - pattern: dev
           include: true # This will ensure that the build runs on the proposed code changes within the feature branch when pull request is created or updated.
-          #source: false 
+          source: false 
       cancel_previous_builds: true
     scripts:
       - *setup_code_signing_on_xcode_project
