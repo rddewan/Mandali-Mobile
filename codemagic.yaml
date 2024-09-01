@@ -83,8 +83,8 @@ definitions:
         flutter pub get > /dev/null
 
         echo Running build_runner in packages/core        
-        flutter pub run build_runner clean
-        flutter pub run build_runner build -d 
+        dart run build_runner clean
+        dart run build_runner build -d 
         flutter pub get > /dev/null
 
         echo Done running build_runner. Navigating up to root directory
@@ -151,7 +151,7 @@ workflows:
       branch_patterns:
         - pattern: dev
           include: true # This will ensure that the build runs on the proposed code changes within the feature branch when pull request is created or updated.
-          #source: false 
+          source: false 
       cancel_previous_builds: true
     scripts:
       - *setup_code_signing_on_xcode_project
