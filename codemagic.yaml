@@ -75,13 +75,16 @@ definitions:
       name: Run build_runner
       script: |
         cd packages/core
-        
-        echo Running build_runner in packages/core        
-        dart run build_runner clean
-        dart run build_runner build -d 
 
         echo Getting dependencies
         flutter pub get > /dev/null
+
+        echo Running build_runner in packages/core        
+        flutter pub run build_runner clean
+        flutter pub run build_runner build -d 
+
+        echo Done running build_runner. Navigating up to root directory
+        cd ../../        
 
     - &get_dependencies
       name: Get the dependencies
@@ -139,10 +142,10 @@ workflows:
         - $HOME/Library/Caches/CocoaPods
         - $FLUTTER_ROOT/.pub-cache
     triggering:
-      #events:
-        #- pull_request
-      #branch_patterns:
-        #- pattern: dev
+      events:
+        - pull_request
+      branch_patterns:
+        - pattern: dev
           #include: true # This will ensure that the build runs on the proposed code changes within the feature branch when pull request is created or updated.
           #source: false 
       cancel_previous_builds: true
