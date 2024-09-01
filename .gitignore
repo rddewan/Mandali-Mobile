@@ -61,3 +61,5 @@ pubspec.lock
 codemagic.sh
 
 export_options.plist
+*.freezed.dart 
+*.g.dart
