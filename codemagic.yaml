@@ -75,10 +75,10 @@ definitions:
       name: Run build_runner
       script: |
         cd packages/core
-        echo Running build_runner in packages/core
         
-        dart pub run build_runner clean
-        dart pub run build_runner build -d 
+        echo Running build_runner in packages/core        
+        dart run build_runner clean
+        dart run build_runner build -d 
 
         echo Getting dependencies
         flutter pub get > /dev/null
