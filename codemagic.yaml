@@ -78,17 +78,19 @@ definitions:
       name: Run build_runner
       script: |
         cd packages/core
+        pwd
 
         echo Getting dependencies
         flutter pub get > /dev/null
 
         echo Running build_runner in packages/core        
-        dart run build_runner clean
-        dart run build_runner build -d 
+        flutter pub run build_runner clean
+        flutter pub run build_runner build -d 
         flutter pub get > /dev/null
 
         echo Done running build_runner. Navigating up to root directory
-        cd ../../        
+        cd ../../    
+        flutter pub get > /dev/null    
 
     - &get_dependencies
       name: Get the dependencies
