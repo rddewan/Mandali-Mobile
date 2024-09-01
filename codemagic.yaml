@@ -82,6 +82,7 @@ definitions:
 
         cd packages/core
         pwd
+        cat .dev.env
 
         echo Getting dependencies
         flutter clean
@@ -146,11 +147,11 @@ workflows:
       ios_signing:
         distribution_type: development # app_store | ad_hoc | development | enterprise
         bundle_identifier: in.wecancode.mandali.dev 
-    cache:
-      cache_paths:
-        - $HOME/.gradle/caches
-        - $HOME/Library/Caches/CocoaPods
-        - $FLUTTER_ROOT/.pub-cache
+    # cache:
+    #   cache_paths:
+    #     - $HOME/.gradle/caches
+    #     - $HOME/Library/Caches/CocoaPods
+    #     - $FLUTTER_ROOT/.pub-cache
     triggering:
       events:
         - pull_request
