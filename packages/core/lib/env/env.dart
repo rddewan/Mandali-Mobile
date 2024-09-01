@@ -6,7 +6,7 @@ part 'env.g.dart';
 abstract class EnvDev {
   @EnviedField(varName: 'BASE_URL')
   static const String baseUrl = _EnvDev.baseUrl;
-  @EnviedField(varName: 'CERTIFICATE')
+  @EnviedField(varName: 'CERTIFICATE', obfuscate: true)
   static final String certificate = _EnvDev.certificate;
   @EnviedField(varName: 'ANDROID_BUILD_ID')
   static const String androidBuildId = _EnvDev.androidBuildId;
@@ -20,7 +20,7 @@ abstract class EnvDev {
 abstract class EnvQA {
   @EnviedField(varName: 'BASE_URL')
   static const String baseUrl = _EnvQA.baseUrl;
-  @EnviedField(varName: 'CERTIFICATE')
+  @EnviedField(varName: 'CERTIFICATE', obfuscate: true)
   static final String certificate = _EnvQA.certificate;
   @EnviedField(varName: 'ANDROID_BUILD_ID')
   static const String androidBuildId = _EnvQA.androidBuildId;
@@ -34,7 +34,7 @@ abstract class EnvQA {
 abstract class EnvProd {
   @EnviedField(varName: 'BASE_URL')
   static const String baseUrl = _EnvProd.baseUrl;
-  @EnviedField(varName: 'CERTIFICATE')
+  @EnviedField(varName: 'CERTIFICATE', obfuscate: true)
   static final String certificate = _EnvProd.certificate;
   @EnviedField(varName: 'ANDROID_BUILD_ID')
   static const String androidBuildId = _EnvProd.androidBuildId;
