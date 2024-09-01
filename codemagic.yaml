@@ -15,9 +15,12 @@ definitions:
     - &setup_env
       name: Set up env
       script: | 
-        echo $ENV_DEV  > $CM_BUILD_DIR/packages/core/.dev.env    
+        echo $ENV_DEV  > $CM_BUILD_DIR/packages/core/.dev.env  
+        cat $CM_BUILD_DIR/packages/core/.dev.env  
         echo $ENV_QA > $CM_BUILD_DIR/packages/core/.qa.env
-        echo $ENV_PROD > $CM_BUILD_DIR/packages/core/.prod.env  
+        cat $CM_BUILD_DIR/packages/core/.qa.env
+        echo $ENV_PROD > $CM_BUILD_DIR/packages/core/.prod.env 
+        cat $CM_BUILD_DIR/packages/core/.prod.env 
 
     - &setup_translation_credentials
       name: Set up Translation Credentials
@@ -82,6 +85,7 @@ definitions:
         echo Running build_runner in packages/core        
         flutter pub run build_runner clean
         flutter pub run build_runner build -d 
+        flutter pub get > /dev/null
 
         echo Done running build_runner. Navigating up to root directory
         cd ../../        
@@ -146,7 +150,7 @@ workflows:
         - pull_request
       branch_patterns:
         - pattern: dev
-          #include: true # This will ensure that the build runs on the proposed code changes within the feature branch when pull request is created or updated.
+          include: true # This will ensure that the build runs on the proposed code changes within the feature branch when pull request is created or updated.
           #source: false 
       cancel_previous_builds: true
     scripts:
