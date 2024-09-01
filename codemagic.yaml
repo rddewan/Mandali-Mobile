@@ -77,10 +77,14 @@ definitions:
     - &build_runner
       name: Run build_runner
       script: |
+        flutter clean
+        flutter pub get > /dev/null
+
         cd packages/core
         pwd
 
         echo Getting dependencies
+        flutter clean
         flutter pub get > /dev/null
 
         echo Running build_runner in packages/core        
