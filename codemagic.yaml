@@ -74,7 +74,14 @@ definitions:
     - &build_runner
       name: Run build_runner
       script: |
-        ./run_build_runner.sh 
+        cd packages/core
+        echo Running build_runner in packages/core
+        
+        dart pub run build_runner clean
+        dart pub run build_runner build -d 
+
+        echo Getting dependencies
+        flutter pub get > /dev/null
 
     - &get_dependencies
       name: Get the dependencies

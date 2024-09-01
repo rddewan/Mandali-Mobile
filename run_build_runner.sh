@@ -12,12 +12,6 @@ run_flutter_commands() {
   echo "Exiting directory: $1"
 }
 
-
-# Run build_runner in the root directory
-flutter pub get
-dart pub run build_runner clean
-dart pub run build_runner build -d 
-
 # Root directory of your Flutter project
 project_root="."
 
@@ -48,14 +42,12 @@ for package_dir in "$packages_dir"/*/; do
   fi
 done
 
-# Return to the project root directory
 cd "$project_root"
 
-# Run build_runner in the package/account directory as it depends on generated file from package/common
-cd $packages_dir/account
+# Run build_runner in the root directory
 dart pub run build_runner clean
-dart pub run build_runner build -d
-
-cd "$project_root"
+dart pub run build_runner build -d 
+# Get the dependencies
+flutter pub get > /dev/null
 
 echo "Script execution complete."
