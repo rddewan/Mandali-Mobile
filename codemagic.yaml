@@ -186,7 +186,7 @@ workflows:
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
           --flavor dev -t lib/main_dev.dart \
-          --obfuscate --split-debug-info=build/ios/symbols
+          -- --obfuscate --split-debug-info=build/ios/symbols
 
       - name: Flutter build iOS debug
         script: |
@@ -296,7 +296,7 @@ workflows:
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
           --flavor qa -t lib/main_qa.dart \
-          --obfuscate --split-debug-info=build/ios/symbols
+          -- --obfuscate --split-debug-info=build/ios/symbols
 
       - name: Flutter Build iOS Release
         script: |
@@ -305,7 +305,7 @@ workflows:
           --build-number=$BUILD_NUMBER  \
           --flavor qa -t lib/main_qa.dart \
           -- --export-options-plist=$HOME/export_options.plist \
-          --obfuscate --split-debug-info=build/ios/symbols
+          -- --obfuscate --split-debug-info=build/ios/symbols
 
 
     artifacts:      
@@ -427,20 +427,20 @@ workflows:
       
       - name: Flutter build android release .aab
         script: |           
-          flutter build appbundle --release \
+          shorebird release android \
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
           --flavor prod -t lib/main_prod.dart \
-          --obfuscate --split-debug-info=build/ios/symbols
+          -- --obfuscate --split-debug-info=build/ios/symbols
 
       - name: Flutter Build iOS Release
         script: |          
-          flutter build ipa --release \
+          shorebird release ios \
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
           --flavor prod -t lib/main_prod.dart \
           -- --export-options-plist=$HOME/export_options.plist \
-          --obfuscate --split-debug-info=build/ios/symbols
+          -- --obfuscate --split-debug-info=build/ios/symbols
 
 
     artifacts:      
