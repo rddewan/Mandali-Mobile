@@ -26,7 +26,8 @@ class MemberDto with _$MemberDto {
     @JsonKey(name: "email") required String email,
     @JsonKey(name: "phoneNumber") required dynamic phoneNumber,
     @JsonKey(name: "photo") String? photo,
-    @JsonKey(name: "role") required List<RoleDto> role,
+    @JsonKey(name: "role") @Default([]) List<RoleDto> role,
+    @JsonKey(name: "guild") @Default([]) List<GuildDto> guild,
   }) = _MemberDto;
 
   factory MemberDto.fromJson(Map<String, dynamic> json) =>

@@ -32,19 +32,6 @@ dependencies:
     path: ./packages/member
   
 
-  flutter_riverpod: any
-  go_router: any
-  flutter_local_notifications: any
-  dio: any
-  logging: any
-  firebase_core: any
-  firebase_messaging: any
-  riverpod_annotation: any
-  timezone: any
-  firebase_crashlytics: any
-  flutter_styled_toast: any
-  loader_overlay: any
-  upgrader: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -62,6 +49,7 @@ dependency_overrides:
   meta: 1.15.0
 
 flutter:
+  uses-material-design: true
+
   assets:
     - shorebird.yaml
-  uses-material-design: true

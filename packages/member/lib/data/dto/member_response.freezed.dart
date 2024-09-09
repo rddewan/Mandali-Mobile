@@ -228,6 +228,8 @@ mixin _$MemberDto {
   String? get photo => throw _privateConstructorUsedError;
   @JsonKey(name: "role")
   List<RoleDto> get role => throw _privateConstructorUsedError;
+  @JsonKey(name: "guild")
+  List<GuildDto> get guild => throw _privateConstructorUsedError;
 
   /// Serializes this MemberDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -250,7 +252,8 @@ abstract class $MemberDtoCopyWith<$Res> {
       @JsonKey(name: "email") String email,
       @JsonKey(name: "phoneNumber") dynamic phoneNumber,
       @JsonKey(name: "photo") String? photo,
-      @JsonKey(name: "role") List<RoleDto> role});
+      @JsonKey(name: "role") List<RoleDto> role,
+      @JsonKey(name: "guild") List<GuildDto> guild});
 }
 
 /// @nodoc
@@ -274,6 +277,7 @@ class _$MemberDtoCopyWithImpl<$Res, $Val extends MemberDto>
     Object? phoneNumber = freezed,
     Object? photo = freezed,
     Object? role = null,
+    Object? guild = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -300,6 +304,10 @@ class _$MemberDtoCopyWithImpl<$Res, $Val extends MemberDto>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as List<RoleDto>,
+      guild: null == guild
+          ? _value.guild
+          : guild // ignore: cast_nullable_to_non_nullable
+              as List<GuildDto>,
     ) as $Val);
   }
 }
@@ -318,7 +326,8 @@ abstract class _$$MemberDtoImplCopyWith<$Res>
       @JsonKey(name: "email") String email,
       @JsonKey(name: "phoneNumber") dynamic phoneNumber,
       @JsonKey(name: "photo") String? photo,
-      @JsonKey(name: "role") List<RoleDto> role});
+      @JsonKey(name: "role") List<RoleDto> role,
+      @JsonKey(name: "guild") List<GuildDto> guild});
 }
 
 /// @nodoc
@@ -340,6 +349,7 @@ class __$$MemberDtoImplCopyWithImpl<$Res>
     Object? phoneNumber = freezed,
     Object? photo = freezed,
     Object? role = null,
+    Object? guild = null,
   }) {
     return _then(_$MemberDtoImpl(
       id: null == id
@@ -366,6 +376,10 @@ class __$$MemberDtoImplCopyWithImpl<$Res>
           ? _value._role
           : role // ignore: cast_nullable_to_non_nullable
               as List<RoleDto>,
+      guild: null == guild
+          ? _value._guild
+          : guild // ignore: cast_nullable_to_non_nullable
+              as List<GuildDto>,
     ));
   }
 }
@@ -379,8 +393,10 @@ class _$MemberDtoImpl implements _MemberDto {
       @JsonKey(name: "email") required this.email,
       @JsonKey(name: "phoneNumber") required this.phoneNumber,
       @JsonKey(name: "photo") this.photo,
-      @JsonKey(name: "role") required final List<RoleDto> role})
-      : _role = role;
+      @JsonKey(name: "role") final List<RoleDto> role = const [],
+      @JsonKey(name: "guild") final List<GuildDto> guild = const []})
+      : _role = role,
+        _guild = guild;
 
   factory _$MemberDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$MemberDtoImplFromJson(json);
@@ -409,9 +425,18 @@ class _$MemberDtoImpl implements _MemberDto {
     return EqualUnmodifiableListView(_role);
   }
 
+  final List<GuildDto> _guild;
+  @override
+  @JsonKey(name: "guild")
+  List<GuildDto> get guild {
+    if (_guild is EqualUnmodifiableListView) return _guild;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_guild);
+  }
+
   @override
   String toString() {
-    return 'MemberDto(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, photo: $photo, role: $role)';
+    return 'MemberDto(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, photo: $photo, role: $role, guild: $guild)';
   }
 
   @override
@@ -425,7 +450,8 @@ class _$MemberDtoImpl implements _MemberDto {
             const DeepCollectionEquality()
                 .equals(other.phoneNumber, phoneNumber) &&
             (identical(other.photo, photo) || other.photo == photo) &&
-            const DeepCollectionEquality().equals(other._role, _role));
+            const DeepCollectionEquality().equals(other._role, _role) &&
+            const DeepCollectionEquality().equals(other._guild, _guild));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -437,7 +463,8 @@ class _$MemberDtoImpl implements _MemberDto {
       email,
       const DeepCollectionEquality().hash(phoneNumber),
       photo,
-      const DeepCollectionEquality().hash(_role));
+      const DeepCollectionEquality().hash(_role),
+      const DeepCollectionEquality().hash(_guild));
 
   /// Create a copy of MemberDto
   /// with the given fields replaced by the non-null parameter values.
@@ -457,13 +484,13 @@ class _$MemberDtoImpl implements _MemberDto {
 
 abstract class _MemberDto implements MemberDto {
   const factory _MemberDto(
-          {@JsonKey(name: "id") required final int id,
-          @JsonKey(name: "name") required final String name,
-          @JsonKey(name: "email") required final String email,
-          @JsonKey(name: "phoneNumber") required final dynamic phoneNumber,
-          @JsonKey(name: "photo") final String? photo,
-          @JsonKey(name: "role") required final List<RoleDto> role}) =
-      _$MemberDtoImpl;
+      {@JsonKey(name: "id") required final int id,
+      @JsonKey(name: "name") required final String name,
+      @JsonKey(name: "email") required final String email,
+      @JsonKey(name: "phoneNumber") required final dynamic phoneNumber,
+      @JsonKey(name: "photo") final String? photo,
+      @JsonKey(name: "role") final List<RoleDto> role,
+      @JsonKey(name: "guild") final List<GuildDto> guild}) = _$MemberDtoImpl;
 
   factory _MemberDto.fromJson(Map<String, dynamic> json) =
       _$MemberDtoImpl.fromJson;
@@ -486,6 +513,9 @@ abstract class _MemberDto implements MemberDto {
   @override
   @JsonKey(name: "role")
   List<RoleDto> get role;
+  @override
+  @JsonKey(name: "guild")
+  List<GuildDto> get guild;
 
   /// Create a copy of MemberDto
   /// with the given fields replaced by the non-null parameter values.
