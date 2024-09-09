@@ -11,5 +11,6 @@ abstract class MemberModel with _$MemberModel {
     @Default('') String phoneNumber,
     String? photo,
     @Default([]) List<String> roles,
+    @Default([]) List<String> guilds,
   }) = _MemberModel;
 }

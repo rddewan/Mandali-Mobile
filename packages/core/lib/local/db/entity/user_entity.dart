@@ -14,6 +14,7 @@ class UserEntity {
   String? photo;
 
   List<RoleEntity>? role;
+  List<GuildEntity>? guild;
   UserChurchEntity? church;
 }
 
@@ -22,6 +23,14 @@ class RoleEntity {
   int? id;
   @Enumerated(EnumType.name)
   UserRole? name;
+}
+
+@embedded
+class GuildEntity {
+  int? id;
+  @Enumerated(EnumType.name)
+  UserGuild? name;
+  String? description;
 }
 
 @embedded

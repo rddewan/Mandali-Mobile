@@ -31,25 +31,39 @@ class ProfileWidget extends ConsumerWidget {
               padding: const EdgeInsets.all(kSmall),
               child: Column(
                 children: [
-                  const SizedBox(height: kMedium),
-                  ProfileImageWidget(photo: member?.photo),
-                  const SizedBox(height: kMedium),
-                  Text(
-                    member?.name ?? '',
-                    style: context.textTheme.titleLarge,
+                  Row(
+                    children: [
+                      const Spacer(),
+                      Wrap(
+                        spacing: kXSmall,
+                        runSpacing: -kMedium,
+                        children: _guilds(member),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: kMedium),
-                  Text(
-                    member?.phoneNumber ?? '',
-                    style: context.textTheme.bodyLarge,
+                  Column(
+                    children: [
+                      const SizedBox(height: kMedium),
+                      ProfileImageWidget(photo: member?.photo),
+                      const SizedBox(height: kMedium),
+                      Text(
+                        member?.name ?? '',
+                        style: context.textTheme.titleLarge,
+                      ),
+                      const SizedBox(height: kMedium),
+                      Text(
+                        member?.phoneNumber ?? '',
+                        style: context.textTheme.bodyLarge,
+                      ),
+                      if (member?.roles != null) ...[
+                        Wrap(
+                          spacing: kXSmall,
+                          runSpacing: -kMedium,
+                          children: _roles(member),
+                        ),
+                      ],
+                    ],
                   ),
-                  if (member?.roles != null) ...[
-                    Wrap(
-                      spacing: kXSmall,
-                      runSpacing: -kMedium,
-                      children: _roles(member),
-                    ),
-                  ],
                 ],
               ),
             ),
@@ -61,6 +75,25 @@ class ProfileWidget extends ConsumerWidget {
 
   List<Widget> _roles(MemberModel? user) {
     return user?.roles
+            .map(
+              (e) => Chip(
+                label: Text(e),
+                labelPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: -4,
+                ),
+                padding: const EdgeInsets.all(0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(kMedium),
+                ),
+              ),
+            )
+            .toList() ??
+        [];
+  }
+
+  List<Widget> _guilds(MemberModel? user) {
+    return user?.guilds
             .map(
               (e) => Chip(
                 label: Text(e),

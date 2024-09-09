@@ -15,9 +15,12 @@ definitions:
     - &setup_env
       name: Set up env
       script: | 
-        echo $ENV_DEV  > $CM_BUILD_DIR/packages/core/.dev.env    
-        echo $ENV_QA > $CM_BUILD_DIR/packages/core/.qa.env
-        echo $ENV_PROD > $CM_BUILD_DIR/packages/core/.prod.env  
+        echo $ENV_DEV | base64 --decode > $CM_BUILD_DIR/packages/core/.dev.env  
+        cat $CM_BUILD_DIR/packages/core/.dev.env  
+        echo $ENV_QA | base64 --decode > $CM_BUILD_DIR/packages/core/.qa.env
+        cat $CM_BUILD_DIR/packages/core/.qa.env
+        echo $ENV_PROD | base64 --decode > $CM_BUILD_DIR/packages/core/.prod.env 
+        cat $CM_BUILD_DIR/packages/core/.prod.env 
 
     - &setup_translation_credentials
       name: Set up Translation Credentials
@@ -73,15 +76,21 @@ definitions:
 
     - &build_runner
       name: Run build_runner
-      script: |
+      script: |        
         cd packages/core
+        pwd
         
-        echo Running build_runner in packages/core        
-        dart run build_runner clean
-        dart run build_runner build -d 
-
         echo Getting dependencies
         flutter pub get > /dev/null
+
+        echo Running build_runner in packages/core        
+        flutter pub run build_runner clean
+        flutter pub run build_runner build -d 
+        flutter pub get > /dev/null
+
+        echo Done running build_runner. Navigating up to root directory
+        cd ../../    
+        flutter pub get > /dev/null    
 
     - &get_dependencies
       name: Get the dependencies
@@ -133,18 +142,18 @@ workflows:
       ios_signing:
         distribution_type: development # app_store | ad_hoc | development | enterprise
         bundle_identifier: in.wecancode.mandali.dev 
-    cache:
-      cache_paths:
-        - $HOME/.gradle/caches
-        - $HOME/Library/Caches/CocoaPods
-        - $FLUTTER_ROOT/.pub-cache
+    # cache:
+    #   cache_paths:
+    #     - $HOME/.gradle/caches
+    #     - $HOME/Library/Caches/CocoaPods
+    #     - $FLUTTER_ROOT/.pub-cache
     triggering:
-      #events:
-        #- pull_request
-      #branch_patterns:
-        #- pattern: dev
-          #include: true # This will ensure that the build runs on the proposed code changes within the feature branch when pull request is created or updated.
-          #source: false 
+      events:
+        - pull_request
+      branch_patterns:
+        - pattern: dev
+          include: true # This will ensure that the build runs on the proposed code changes within the feature branch when pull request is created or updated.
+          source: false 
       cancel_previous_builds: true
     scripts:
       - *setup_code_signing_on_xcode_project
@@ -176,7 +185,8 @@ workflows:
           flutter build apk --debug \
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
-          --flavor dev -t lib/main_dev.dart
+          --flavor dev -t lib/main_dev.dart \
+          --obfuscate --split-debug-info=build/ios/symbols
 
       - name: Flutter build iOS debug
         script: |
@@ -184,13 +194,16 @@ workflows:
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
           --flavor dev -t lib/main_dev.dart \
-          --export-options-plist=$HOME/export_options.plist
+          --export-options-plist=$HOME/export_options.plist \
+          --obfuscate --split-debug-info=build/ios/symbols
 
 
     artifacts:      
       - build/**/outputs/**/*.apk      
       - build/**/outputs/**/mapping.txt
       - build/ios/ipa/*.ipa
+      - build/ios/symbols/**/*
+      - /Users/builder/export_options.plist
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
     publishing:      
       email:
@@ -282,7 +295,8 @@ workflows:
           shorebird release android --artifact apk \
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
-          --flavor qa -t lib/main_qa.dart
+          --flavor qa -t lib/main_qa.dart \
+          --obfuscate --split-debug-info=build/ios/symbols
 
       - name: Flutter Build iOS Release
         script: |
@@ -290,13 +304,16 @@ workflows:
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
           --flavor qa -t lib/main_qa.dart \
-          -- --export-options-plist=$HOME/export_options.plist
+          -- --export-options-plist=$HOME/export_options.plist \
+          --obfuscate --split-debug-info=build/ios/symbols
 
 
     artifacts:      
       - build/**/outputs/**/*.apk      
       - build/**/outputs/**/mapping.txt
       - build/ios/ipa/*.ipa
+      - build/ios/symbols/**/*
+      - /Users/builder/export_options.plist
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
     publishing:
       firebase:
@@ -413,7 +430,8 @@ workflows:
           flutter build appbundle --release \
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
-          --flavor prod -t lib/main_prod.dart
+          --flavor prod -t lib/main_prod.dart \
+          --obfuscate --split-debug-info=build/ios/symbols
 
       - name: Flutter Build iOS Release
         script: |          
@@ -421,13 +439,16 @@ workflows:
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
           --flavor prod -t lib/main_prod.dart \
-          -- --export-options-plist=$HOME/export_options.plist
+          -- --export-options-plist=$HOME/export_options.plist \
+          --obfuscate --split-debug-info=build/ios/symbols
 
 
     artifacts:      
       - build/**/outputs/**/*.aab      
       - build/**/outputs/**/mapping.txt
       - build/ios/ipa/*.ipa
+      - build/ios/symbols/**/*
+      - /Users/builder/export_options.plist
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
     publishing:
       google_play:

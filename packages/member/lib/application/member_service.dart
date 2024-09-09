@@ -58,6 +58,7 @@ List<MemberModel> _mapToUsers(MembersResponse response) {
           phoneNumber: e.phoneNumber,
           photo: e.photo,
           roles: e.role.map((e) => e.name.name).toList(),
+          guilds: e.guild.map((e) => e.name.guildName).toList(),
         ),
       )
       .toList();
@@ -73,5 +74,6 @@ MemberModel _mapToUser(MemberResponse response) {
     phoneNumber: data.phoneNumber,
     photo: data.photo,
     roles: data.role.map((e) => e.name.name).toList(),
+    guilds: data.guild.map((e) => e.name.guildName).toList(),
   );
 }

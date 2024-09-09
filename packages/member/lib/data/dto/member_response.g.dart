@@ -26,9 +26,14 @@ _$MemberDtoImpl _$$MemberDtoImplFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String,
       phoneNumber: json['phoneNumber'],
       photo: json['photo'] as String?,
-      role: (json['role'] as List<dynamic>)
-          .map((e) => RoleDto.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      role: (json['role'] as List<dynamic>?)
+              ?.map((e) => RoleDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      guild: (json['guild'] as List<dynamic>?)
+              ?.map((e) => GuildDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$MemberDtoImplToJson(_$MemberDtoImpl instance) =>
@@ -39,4 +44,5 @@ Map<String, dynamic> _$$MemberDtoImplToJson(_$MemberDtoImpl instance) =>
       'phoneNumber': instance.phoneNumber,
       'photo': instance.photo,
       'role': instance.role,
+      'guild': instance.guild,
     };

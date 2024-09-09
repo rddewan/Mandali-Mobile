@@ -52,6 +52,7 @@ part 'extensions/string_extension.dart';
 part 'extensions/go_router_extension.dart';
 part 'extensions/church_service_type.dart';
 part 'extensions/dark_mode.dart';
+part 'extensions/user_guild_extension.dart';
 
 part 'logging/logger_provider.dart';
 part 'logging/logging_provider.dart';
@@ -71,6 +72,7 @@ part 'enum/notification_status.dart';
 part 'enum/notification_type.dart';
 part 'enum/media_type.dart';
 part 'enum/user_role.dart';
+part 'enum/user_guild.dart';
 
 part 'providers/cache_manager_provider.dart';
 part 'providers/currency_code_provider.dart';

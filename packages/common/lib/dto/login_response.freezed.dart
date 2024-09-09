@@ -609,6 +609,8 @@ mixin _$UserDto {
   String? get photo => throw _privateConstructorUsedError;
   @JsonKey(name: "role")
   List<RoleDto> get role => throw _privateConstructorUsedError;
+  @JsonKey(name: "guild")
+  List<GuildDto> get guild => throw _privateConstructorUsedError;
   @JsonKey(name: "church")
   ChurchDto get church => throw _privateConstructorUsedError;
 
@@ -633,6 +635,7 @@ abstract class $UserDtoCopyWith<$Res> {
       @JsonKey(name: "phoneNumber") String? phoneNumber,
       @JsonKey(name: "photo") String? photo,
       @JsonKey(name: "role") List<RoleDto> role,
+      @JsonKey(name: "guild") List<GuildDto> guild,
       @JsonKey(name: "church") ChurchDto church});
 
   $ChurchDtoCopyWith<$Res> get church;
@@ -659,6 +662,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? phoneNumber = freezed,
     Object? photo = freezed,
     Object? role = null,
+    Object? guild = null,
     Object? church = null,
   }) {
     return _then(_value.copyWith(
@@ -686,6 +690,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as List<RoleDto>,
+      guild: null == guild
+          ? _value.guild
+          : guild // ignore: cast_nullable_to_non_nullable
+              as List<GuildDto>,
       church: null == church
           ? _value.church
           : church // ignore: cast_nullable_to_non_nullable
@@ -718,6 +726,7 @@ abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       @JsonKey(name: "phoneNumber") String? phoneNumber,
       @JsonKey(name: "photo") String? photo,
       @JsonKey(name: "role") List<RoleDto> role,
+      @JsonKey(name: "guild") List<GuildDto> guild,
       @JsonKey(name: "church") ChurchDto church});
 
   @override
@@ -743,6 +752,7 @@ class __$$UserDtoImplCopyWithImpl<$Res>
     Object? phoneNumber = freezed,
     Object? photo = freezed,
     Object? role = null,
+    Object? guild = null,
     Object? church = null,
   }) {
     return _then(_$UserDtoImpl(
@@ -770,6 +780,10 @@ class __$$UserDtoImplCopyWithImpl<$Res>
           ? _value._role
           : role // ignore: cast_nullable_to_non_nullable
               as List<RoleDto>,
+      guild: null == guild
+          ? _value._guild
+          : guild // ignore: cast_nullable_to_non_nullable
+              as List<GuildDto>,
       church: null == church
           ? _value.church
           : church // ignore: cast_nullable_to_non_nullable
@@ -788,8 +802,10 @@ class _$UserDtoImpl implements _UserDto {
       @JsonKey(name: "phoneNumber") this.phoneNumber,
       @JsonKey(name: "photo") this.photo,
       @JsonKey(name: "role") required final List<RoleDto> role,
+      @JsonKey(name: "guild") required final List<GuildDto> guild,
       @JsonKey(name: "church") required this.church})
-      : _role = role;
+      : _role = role,
+        _guild = guild;
 
   factory _$UserDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDtoImplFromJson(json);
@@ -818,13 +834,22 @@ class _$UserDtoImpl implements _UserDto {
     return EqualUnmodifiableListView(_role);
   }
 
+  final List<GuildDto> _guild;
+  @override
+  @JsonKey(name: "guild")
+  List<GuildDto> get guild {
+    if (_guild is EqualUnmodifiableListView) return _guild;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_guild);
+  }
+
   @override
   @JsonKey(name: "church")
   final ChurchDto church;
 
   @override
   String toString() {
-    return 'UserDto(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, photo: $photo, role: $role, church: $church)';
+    return 'UserDto(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, photo: $photo, role: $role, guild: $guild, church: $church)';
   }
 
   @override
@@ -839,13 +864,22 @@ class _$UserDtoImpl implements _UserDto {
                 other.phoneNumber == phoneNumber) &&
             (identical(other.photo, photo) || other.photo == photo) &&
             const DeepCollectionEquality().equals(other._role, _role) &&
+            const DeepCollectionEquality().equals(other._guild, _guild) &&
             (identical(other.church, church) || other.church == church));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, email, phoneNumber,
-      photo, const DeepCollectionEquality().hash(_role), church);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      email,
+      phoneNumber,
+      photo,
+      const DeepCollectionEquality().hash(_role),
+      const DeepCollectionEquality().hash(_guild),
+      church);
 
   /// Create a copy of UserDto
   /// with the given fields replaced by the non-null parameter values.
@@ -871,6 +905,7 @@ abstract class _UserDto implements UserDto {
           @JsonKey(name: "phoneNumber") final String? phoneNumber,
           @JsonKey(name: "photo") final String? photo,
           @JsonKey(name: "role") required final List<RoleDto> role,
+          @JsonKey(name: "guild") required final List<GuildDto> guild,
           @JsonKey(name: "church") required final ChurchDto church}) =
       _$UserDtoImpl;
 
@@ -894,6 +929,9 @@ abstract class _UserDto implements UserDto {
   @override
   @JsonKey(name: "role")
   List<RoleDto> get role;
+  @override
+  @JsonKey(name: "guild")
+  List<GuildDto> get guild;
   @override
   @JsonKey(name: "church")
   ChurchDto get church;
@@ -1076,6 +1114,182 @@ abstract class _RoleDto implements RoleDto {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RoleDtoImplCopyWith<_$RoleDtoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+GuildDto _$GuildDtoFromJson(Map<String, dynamic> json) {
+  return _GuildDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$GuildDto {
+  @JsonKey(name: "id")
+  int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "name")
+  UserGuild get name => throw _privateConstructorUsedError;
+
+  /// Serializes this GuildDto to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of GuildDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $GuildDtoCopyWith<GuildDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GuildDtoCopyWith<$Res> {
+  factory $GuildDtoCopyWith(GuildDto value, $Res Function(GuildDto) then) =
+      _$GuildDtoCopyWithImpl<$Res, GuildDto>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int id, @JsonKey(name: "name") UserGuild name});
+}
+
+/// @nodoc
+class _$GuildDtoCopyWithImpl<$Res, $Val extends GuildDto>
+    implements $GuildDtoCopyWith<$Res> {
+  _$GuildDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of GuildDto
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as UserGuild,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$GuildDtoImplCopyWith<$Res>
+    implements $GuildDtoCopyWith<$Res> {
+  factory _$$GuildDtoImplCopyWith(
+          _$GuildDtoImpl value, $Res Function(_$GuildDtoImpl) then) =
+      __$$GuildDtoImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int id, @JsonKey(name: "name") UserGuild name});
+}
+
+/// @nodoc
+class __$$GuildDtoImplCopyWithImpl<$Res>
+    extends _$GuildDtoCopyWithImpl<$Res, _$GuildDtoImpl>
+    implements _$$GuildDtoImplCopyWith<$Res> {
+  __$$GuildDtoImplCopyWithImpl(
+      _$GuildDtoImpl _value, $Res Function(_$GuildDtoImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GuildDto
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+  }) {
+    return _then(_$GuildDtoImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as UserGuild,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$GuildDtoImpl implements _GuildDto {
+  const _$GuildDtoImpl(
+      {@JsonKey(name: "id") required this.id,
+      @JsonKey(name: "name") required this.name});
+
+  factory _$GuildDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GuildDtoImplFromJson(json);
+
+  @override
+  @JsonKey(name: "id")
+  final int id;
+  @override
+  @JsonKey(name: "name")
+  final UserGuild name;
+
+  @override
+  String toString() {
+    return 'GuildDto(id: $id, name: $name)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GuildDtoImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name);
+
+  /// Create a copy of GuildDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GuildDtoImplCopyWith<_$GuildDtoImpl> get copyWith =>
+      __$$GuildDtoImplCopyWithImpl<_$GuildDtoImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$GuildDtoImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _GuildDto implements GuildDto {
+  const factory _GuildDto(
+      {@JsonKey(name: "id") required final int id,
+      @JsonKey(name: "name") required final UserGuild name}) = _$GuildDtoImpl;
+
+  factory _GuildDto.fromJson(Map<String, dynamic> json) =
+      _$GuildDtoImpl.fromJson;
+
+  @override
+  @JsonKey(name: "id")
+  int get id;
+  @override
+  @JsonKey(name: "name")
+  UserGuild get name;
+
+  /// Create a copy of GuildDto
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GuildDtoImplCopyWith<_$GuildDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

@@ -22,6 +22,7 @@ mixin _$MemberModel {
   String get phoneNumber => throw _privateConstructorUsedError;
   String? get photo => throw _privateConstructorUsedError;
   List<String> get roles => throw _privateConstructorUsedError;
+  List<String> get guilds => throw _privateConstructorUsedError;
 
   /// Create a copy of MemberModel
   /// with the given fields replaced by the non-null parameter values.
@@ -42,7 +43,8 @@ abstract class $MemberModelCopyWith<$Res> {
       String email,
       String phoneNumber,
       String? photo,
-      List<String> roles});
+      List<String> roles,
+      List<String> guilds});
 }
 
 /// @nodoc
@@ -66,6 +68,7 @@ class _$MemberModelCopyWithImpl<$Res, $Val extends MemberModel>
     Object? phoneNumber = null,
     Object? photo = freezed,
     Object? roles = null,
+    Object? guilds = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -92,6 +95,10 @@ class _$MemberModelCopyWithImpl<$Res, $Val extends MemberModel>
           ? _value.roles
           : roles // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      guilds: null == guilds
+          ? _value.guilds
+          : guilds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -110,7 +117,8 @@ abstract class _$$MemberModelImplCopyWith<$Res>
       String email,
       String phoneNumber,
       String? photo,
-      List<String> roles});
+      List<String> roles,
+      List<String> guilds});
 }
 
 /// @nodoc
@@ -132,6 +140,7 @@ class __$$MemberModelImplCopyWithImpl<$Res>
     Object? phoneNumber = null,
     Object? photo = freezed,
     Object? roles = null,
+    Object? guilds = null,
   }) {
     return _then(_$MemberModelImpl(
       id: null == id
@@ -158,6 +167,10 @@ class __$$MemberModelImplCopyWithImpl<$Res>
           ? _value._roles
           : roles // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      guilds: null == guilds
+          ? _value._guilds
+          : guilds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -171,8 +184,10 @@ class _$MemberModelImpl implements _MemberModel {
       this.email = '',
       this.phoneNumber = '',
       this.photo,
-      final List<String> roles = const []})
-      : _roles = roles;
+      final List<String> roles = const [],
+      final List<String> guilds = const []})
+      : _roles = roles,
+        _guilds = guilds;
 
   @override
   @JsonKey()
@@ -197,9 +212,18 @@ class _$MemberModelImpl implements _MemberModel {
     return EqualUnmodifiableListView(_roles);
   }
 
+  final List<String> _guilds;
+  @override
+  @JsonKey()
+  List<String> get guilds {
+    if (_guilds is EqualUnmodifiableListView) return _guilds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_guilds);
+  }
+
   @override
   String toString() {
-    return 'MemberModel(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, photo: $photo, roles: $roles)';
+    return 'MemberModel(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, photo: $photo, roles: $roles, guilds: $guilds)';
   }
 
   @override
@@ -213,12 +237,20 @@ class _$MemberModelImpl implements _MemberModel {
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
             (identical(other.photo, photo) || other.photo == photo) &&
-            const DeepCollectionEquality().equals(other._roles, _roles));
+            const DeepCollectionEquality().equals(other._roles, _roles) &&
+            const DeepCollectionEquality().equals(other._guilds, _guilds));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, email, phoneNumber,
-      photo, const DeepCollectionEquality().hash(_roles));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      email,
+      phoneNumber,
+      photo,
+      const DeepCollectionEquality().hash(_roles),
+      const DeepCollectionEquality().hash(_guilds));
 
   /// Create a copy of MemberModel
   /// with the given fields replaced by the non-null parameter values.
@@ -236,7 +268,8 @@ abstract class _MemberModel implements MemberModel {
       final String email,
       final String phoneNumber,
       final String? photo,
-      final List<String> roles}) = _$MemberModelImpl;
+      final List<String> roles,
+      final List<String> guilds}) = _$MemberModelImpl;
 
   @override
   int get id;
@@ -250,6 +283,8 @@ abstract class _MemberModel implements MemberModel {
   String? get photo;
   @override
   List<String> get roles;
+  @override
+  List<String> get guilds;
 
   /// Create a copy of MemberModel
   /// with the given fields replaced by the non-null parameter values.
