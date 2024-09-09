@@ -51,6 +51,9 @@ _$UserDtoImpl _$$UserDtoImplFromJson(Map<String, dynamic> json) =>
       role: (json['role'] as List<dynamic>)
           .map((e) => RoleDto.fromJson(e as Map<String, dynamic>))
           .toList(),
+      guild: (json['guild'] as List<dynamic>)
+          .map((e) => GuildDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
       church: ChurchDto.fromJson(json['church'] as Map<String, dynamic>),
     );
 
@@ -62,6 +65,7 @@ Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
       'phoneNumber': instance.phoneNumber,
       'photo': instance.photo,
       'role': instance.role,
+      'guild': instance.guild,
       'church': instance.church,
     };
 
@@ -88,6 +92,25 @@ const _$UserRoleEnumMap = {
   UserRole.pastor: 'pastor',
   UserRole.elder: 'elder',
   UserRole.preacher: 'preacher',
+};
+
+_$GuildDtoImpl _$$GuildDtoImplFromJson(Map<String, dynamic> json) =>
+    _$GuildDtoImpl(
+      id: (json['id'] as num).toInt(),
+      name: $enumDecode(_$UserGuildEnumMap, json['name']),
+    );
+
+Map<String, dynamic> _$$GuildDtoImplToJson(_$GuildDtoImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': _$UserGuildEnumMap[instance.name]!,
+    };
+
+const _$UserGuildEnumMap = {
+  UserGuild.men: 'men',
+  UserGuild.women: 'women',
+  UserGuild.youth: 'youth',
+  UserGuild.childer: 'childer',
 };
 
 _$ChurchDtoImpl _$$ChurchDtoImplFromJson(Map<String, dynamic> json) =>

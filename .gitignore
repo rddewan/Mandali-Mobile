@@ -60,6 +60,9 @@ credentials.json
 pubspec.lock
 codemagic.sh
 
-export_options.plist
+#export_options.plist
 #*.freezed.dart 
 #*.g.dart
+
+*.csv
+*.py

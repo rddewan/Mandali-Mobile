@@ -28,23 +28,29 @@ const UserEntitySchema = CollectionSchema(
       name: r'email',
       type: IsarType.string,
     ),
-    r'name': PropertySchema(
+    r'guild': PropertySchema(
       id: 2,
+      name: r'guild',
+      type: IsarType.objectList,
+      target: r'GuildEntity',
+    ),
+    r'name': PropertySchema(
+      id: 3,
       name: r'name',
       type: IsarType.string,
     ),
     r'phoneNumber': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'phoneNumber',
       type: IsarType.string,
     ),
     r'photo': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'photo',
       type: IsarType.string,
     ),
     r'role': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'role',
       type: IsarType.objectList,
       target: r'RoleEntity',
@@ -59,6 +65,7 @@ const UserEntitySchema = CollectionSchema(
   links: {},
   embeddedSchemas: {
     r'RoleEntity': RoleEntitySchema,
+    r'GuildEntity': GuildEntitySchema,
     r'UserChurchEntity': UserChurchEntitySchema
   },
   getId: _userEntityGetId,
@@ -85,6 +92,20 @@ int _userEntityEstimateSize(
     final value = object.email;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final list = object.guild;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        final offsets = allOffsets[GuildEntity]!;
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount +=
+              GuildEntitySchema.estimateSize(value, offsets, allOffsets);
+        }
+      }
     }
   }
   {
@@ -135,11 +156,17 @@ void _userEntitySerialize(
     object.church,
   );
   writer.writeString(offsets[1], object.email);
-  writer.writeString(offsets[2], object.name);
-  writer.writeString(offsets[3], object.phoneNumber);
-  writer.writeString(offsets[4], object.photo);
+  writer.writeObjectList<GuildEntity>(
+    offsets[2],
+    allOffsets,
+    GuildEntitySchema.serialize,
+    object.guild,
+  );
+  writer.writeString(offsets[3], object.name);
+  writer.writeString(offsets[4], object.phoneNumber);
+  writer.writeString(offsets[5], object.photo);
   writer.writeObjectList<RoleEntity>(
-    offsets[5],
+    offsets[6],
     allOffsets,
     RoleEntitySchema.serialize,
     object.role,
@@ -159,12 +186,18 @@ UserEntity _userEntityDeserialize(
     allOffsets,
   );
   object.email = reader.readStringOrNull(offsets[1]);
+  object.guild = reader.readObjectList<GuildEntity>(
+    offsets[2],
+    GuildEntitySchema.deserialize,
+    allOffsets,
+    GuildEntity(),
+  );
   object.id = id;
-  object.name = reader.readStringOrNull(offsets[2]);
-  object.phoneNumber = reader.readStringOrNull(offsets[3]);
-  object.photo = reader.readStringOrNull(offsets[4]);
+  object.name = reader.readStringOrNull(offsets[3]);
+  object.phoneNumber = reader.readStringOrNull(offsets[4]);
+  object.photo = reader.readStringOrNull(offsets[5]);
   object.role = reader.readObjectList<RoleEntity>(
-    offsets[5],
+    offsets[6],
     RoleEntitySchema.deserialize,
     allOffsets,
     RoleEntity(),
@@ -188,12 +221,19 @@ P _userEntityDeserializeProp<P>(
     case 1:
       return (reader.readStringOrNull(offset)) as P;
     case 2:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readObjectList<GuildEntity>(
+        offset,
+        GuildEntitySchema.deserialize,
+        allOffsets,
+        GuildEntity(),
+      )) as P;
     case 3:
       return (reader.readStringOrNull(offset)) as P;
     case 4:
       return (reader.readStringOrNull(offset)) as P;
     case 5:
+      return (reader.readStringOrNull(offset)) as P;
+    case 6:
       return (reader.readObjectList<RoleEntity>(
         offset,
         RoleEntitySchema.deserialize,
@@ -457,6 +497,110 @@ extension UserEntityQueryFilter
         property: r'email',
         value: '',
       ));
+    });
+  }
+
+  QueryBuilder<UserEntity, UserEntity, QAfterFilterCondition> guildIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'guild',
+      ));
+    });
+  }
+
+  QueryBuilder<UserEntity, UserEntity, QAfterFilterCondition> guildIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'guild',
+      ));
+    });
+  }
+
+  QueryBuilder<UserEntity, UserEntity, QAfterFilterCondition>
+      guildLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'guild',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<UserEntity, UserEntity, QAfterFilterCondition> guildIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'guild',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<UserEntity, UserEntity, QAfterFilterCondition>
+      guildIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'guild',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<UserEntity, UserEntity, QAfterFilterCondition>
+      guildLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'guild',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<UserEntity, UserEntity, QAfterFilterCondition>
+      guildLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'guild',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<UserEntity, UserEntity, QAfterFilterCondition>
+      guildLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'guild',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -1088,6 +1232,13 @@ extension UserEntityQueryObject
     });
   }
 
+  QueryBuilder<UserEntity, UserEntity, QAfterFilterCondition> guildElement(
+      FilterQuery<GuildEntity> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'guild');
+    });
+  }
+
   QueryBuilder<UserEntity, UserEntity, QAfterFilterCondition> roleElement(
       FilterQuery<RoleEntity> q) {
     return QueryBuilder.apply(this, (query) {
@@ -1262,6 +1413,13 @@ extension UserEntityQueryProperty
   QueryBuilder<UserEntity, String?, QQueryOperations> emailProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'email');
+    });
+  }
+
+  QueryBuilder<UserEntity, List<GuildEntity>?, QQueryOperations>
+      guildProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'guild');
     });
   }
 
@@ -1619,6 +1777,322 @@ extension RoleEntityQueryFilter
 
 extension RoleEntityQueryObject
     on QueryBuilder<RoleEntity, RoleEntity, QFilterCondition> {}
+
+// coverage:ignore-file
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
+
+const GuildEntitySchema = Schema(
+  name: r'GuildEntity',
+  id: -6490483209496580994,
+  properties: {
+    r'id': PropertySchema(
+      id: 0,
+      name: r'id',
+      type: IsarType.long,
+    ),
+    r'name': PropertySchema(
+      id: 1,
+      name: r'name',
+      type: IsarType.string,
+      enumMap: _GuildEntitynameEnumValueMap,
+    )
+  },
+  estimateSize: _guildEntityEstimateSize,
+  serialize: _guildEntitySerialize,
+  deserialize: _guildEntityDeserialize,
+  deserializeProp: _guildEntityDeserializeProp,
+);
+
+int _guildEntityEstimateSize(
+  GuildEntity object,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  var bytesCount = offsets.last;
+  {
+    final value = object.name;
+    if (value != null) {
+      bytesCount += 3 + value.name.length * 3;
+    }
+  }
+  return bytesCount;
+}
+
+void _guildEntitySerialize(
+  GuildEntity object,
+  IsarWriter writer,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  writer.writeLong(offsets[0], object.id);
+  writer.writeString(offsets[1], object.name?.name);
+}
+
+GuildEntity _guildEntityDeserialize(
+  Id id,
+  IsarReader reader,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  final object = GuildEntity();
+  object.id = reader.readLongOrNull(offsets[0]);
+  object.name =
+      _GuildEntitynameValueEnumMap[reader.readStringOrNull(offsets[1])];
+  return object;
+}
+
+P _guildEntityDeserializeProp<P>(
+  IsarReader reader,
+  int propertyId,
+  int offset,
+  Map<Type, List<int>> allOffsets,
+) {
+  switch (propertyId) {
+    case 0:
+      return (reader.readLongOrNull(offset)) as P;
+    case 1:
+      return (_GuildEntitynameValueEnumMap[reader.readStringOrNull(offset)])
+          as P;
+    default:
+      throw IsarError('Unknown property with id $propertyId');
+  }
+}
+
+const _GuildEntitynameEnumValueMap = {
+  r'men': r'men',
+  r'women': r'women',
+  r'youth': r'youth',
+  r'childer': r'childer',
+};
+const _GuildEntitynameValueEnumMap = {
+  r'men': UserGuild.men,
+  r'women': UserGuild.women,
+  r'youth': UserGuild.youth,
+  r'childer': UserGuild.childer,
+};
+
+extension GuildEntityQueryFilter
+    on QueryBuilder<GuildEntity, GuildEntity, QFilterCondition> {
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> idIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'id',
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> idIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'id',
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> idEqualTo(
+      int? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'id',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> idGreaterThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'id',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> idLessThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'id',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> idBetween(
+    int? lower,
+    int? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'id',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> nameIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'name',
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition>
+      nameIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'name',
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> nameEqualTo(
+    UserGuild? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> nameGreaterThan(
+    UserGuild? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> nameLessThan(
+    UserGuild? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> nameBetween(
+    UserGuild? lower,
+    UserGuild? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'name',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> nameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> nameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> nameContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> nameMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'name',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition> nameIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'name',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<GuildEntity, GuildEntity, QAfterFilterCondition>
+      nameIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'name',
+        value: '',
+      ));
+    });
+  }
+}
+
+extension GuildEntityQueryObject
+    on QueryBuilder<GuildEntity, GuildEntity, QFilterCondition> {}
 
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
