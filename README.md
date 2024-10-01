@@ -1,6 +1,9 @@
 # Mandali
 Church Management System - Open Source Project.
 
+# Flutter Course
+* [https://mobileacademy/course](https://mobileacademy.io/courses/)
+
 # Build Status
 | Environment | Status  |
 | ----------- | ----------- |
