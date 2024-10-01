@@ -58,6 +58,11 @@ GoogleService-Info.plist
 credentials.json
 
 pubspec.lock
-**.g.dart 
-**.freezed.dart
 codemagic.sh
+
+#export_options.plist
+#*.freezed.dart 
+#*.g.dart
+
+*.csv
+*.py

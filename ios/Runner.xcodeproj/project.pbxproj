@@ -45,6 +45,7 @@
 		794F742B28E6E33F00CC7DB6 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		795B327D0741DDF409732FCD /* Pods-Runner.debug-qa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-qa.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-qa.xcconfig"; sourceTree = "<group>"; };
 		79A0E9FE2C80976E003E23EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79DC61192C8345700027599A /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79E2B84E2C29736A0090FED9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		79EF98E92C299C7D0054FFF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
@@ -55,7 +56,6 @@
 		9115B81F4B1553A13B81A2E0 /* prodRelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = prodRelease.xcconfig; path = Flutter/prodRelease.xcconfig; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
-		97C146EE1CF9000F007C117D /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Runner.app; path = "/Volumes/External/Flutter Project/mandali/ios/build/Debug-dev-iphoneos/Runner.app"; sourceTree = "<absolute>"; };
 		97C146FB1CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -157,6 +157,7 @@
 				97C146F01CF9000F007C117D /* Runner */,
 				4AA8D118EC0826BE1F7C5DFA /* Pods */,
 				D661297BB6C38BCE4D753BA1 /* Frameworks */,
+				79DC61192C8345700027599A /* Runner.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -210,7 +211,7 @@
 			);
 			name = Runner;
 			productName = Runner;
-			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
+			productReference = 79DC61192C8345700027599A /* Runner.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -802,7 +803,7 @@
 			buildSettings = {
 				APP_DISPLAY_NAME = "Mandali Dev";
 				ASSET_PREFIX = dev;
-				BUNDLE_NAME = "MAQE HR DEV";
+				BUNDLE_NAME = "Mandali DEV";
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -816,7 +817,6 @@
 				PRODUCT_NAME = Runner;
 				PROVISIONING_PROFILE_SPECIFIER = "FlutterBaseProjectTemplate-Dev";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Mandali Profile Dev";
-				WEB_AUTH_SCHEMA = "maqe-hr-dev";
 			};
 			name = "Debug-dev";
 		};
@@ -901,7 +901,7 @@
 			buildSettings = {
 				APP_DISPLAY_NAME = "Mandali QA";
 				ASSET_PREFIX = qa;
-				BUNDLE_NAME = "MAQE HR QA";
+				BUNDLE_NAME = "Mandali QA";
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FCUZNYGQMQ;
@@ -912,7 +912,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = in.wecancode.mandali.qa;
 				PRODUCT_NAME = Runner;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Mandali Profile QA";
-				WEB_AUTH_SCHEMA = "maqe-hr-dev";
 			};
 			name = "Debug-qa";
 		};
@@ -997,7 +996,7 @@
 			buildSettings = {
 				APP_DISPLAY_NAME = "Mandali QA";
 				ASSET_PREFIX = qa;
-				BUNDLE_NAME = "MAQE HR QA";
+				BUNDLE_NAME = "Mandali QA";
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FCUZNYGQMQ;
@@ -1008,7 +1007,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = in.wecancode.mandali.qa;
 				PRODUCT_NAME = Runner;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Mandali Profile QA";
-				WEB_AUTH_SCHEMA = "maqe-hr-dev";
 			};
 			name = "Profile-qa";
 		};
@@ -1093,7 +1091,7 @@
 			buildSettings = {
 				APP_DISPLAY_NAME = "Mandali QA";
 				ASSET_PREFIX = qa;
-				BUNDLE_NAME = "MAQE HR QA";
+				BUNDLE_NAME = "Mandali QA";
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FCUZNYGQMQ;
@@ -1104,7 +1102,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = in.wecancode.mandali.qa;
 				PRODUCT_NAME = Runner;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Mandali Profile QA";
-				WEB_AUTH_SCHEMA = "maqe-hr-dev";
 			};
 			name = "Release-qa";
 		};
@@ -1113,7 +1110,7 @@
 			baseConfigurationReference = 8F928228D4F720F24A8AE8A0 /* Pods-Runner.profile-dev.xcconfig */;
 			buildSettings = {
 				APP_DISPLAY_NAME = "Mandali Dev";
-				BUNDLE_NAME = "MAQE HR DEV";
+				BUNDLE_NAME = MandaliDEV;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = F86H3NTCG9;
@@ -1126,7 +1123,6 @@
 				PRODUCT_NAME = Runner;
 				PROVISIONING_PROFILE_SPECIFIER = "FlutterBaseProjectTemplate-Dev";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Mandali Profile Dev";
-				WEB_AUTH_SCHEMA = "maqe-hr-dev";
 			};
 			name = "Profile-dev";
 		};
@@ -1135,7 +1131,7 @@
 			baseConfigurationReference = 4FF84AF270DBD24D48F160CE /* Pods-Runner.release-dev.xcconfig */;
 			buildSettings = {
 				APP_DISPLAY_NAME = "Mandali Dev";
-				BUNDLE_NAME = "MAQE HR DEV";
+				BUNDLE_NAME = "Mandali DEV";
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1149,7 +1145,6 @@
 				PRODUCT_NAME = Runner;
 				PROVISIONING_PROFILE_SPECIFIER = "FlutterBaseProjectTemplate-Dev";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Mandali Profile Dev";
-				WEB_AUTH_SCHEMA = "maqe-hr-dev";
 			};
 			name = "Release-dev";
 		};
@@ -1168,7 +1163,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = in.wecancode.mandali;
 				PRODUCT_NAME = Runner;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Mandali Profile Prod";
-				WEB_AUTH_SCHEMA = "maqe-hr";
 			};
 			name = "Debug-prod";
 		};
@@ -1187,7 +1181,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = in.wecancode.mandali;
 				PRODUCT_NAME = Runner;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Mandali Profile Prod";
-				WEB_AUTH_SCHEMA = "maqe-hr";
 			};
 			name = "Profile-prod";
 		};
@@ -1206,7 +1199,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = in.wecancode.mandali;
 				PRODUCT_NAME = Runner;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Mandali Profile Prod";
-				WEB_AUTH_SCHEMA = "maqe-hr";
 			};
 			name = "Release-prod";
 		};

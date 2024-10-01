@@ -223,5 +223,13 @@ UserEntity _mapToUserEntity(UserDto response) {
             ..name = e.name,
         )
         .toList()
+    ..guild = response.guild
+        .map(
+          (e) => GuildEntity()
+            ..id = e.id
+            ..name = e.name
+            ..description = e.name.guildName,
+        )
+        .toList()
     ..church = church;
 }

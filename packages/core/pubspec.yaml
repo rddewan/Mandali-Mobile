@@ -46,8 +46,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your package, add an assets section, like this:
-  assets:
-    - .dev.env
-    - .qa.env  
-    - .prod.env
+  # assets:
+    #- .dev.env
+    #- .qa.env  
+    #- .prod.env
 

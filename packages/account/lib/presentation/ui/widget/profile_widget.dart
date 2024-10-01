@@ -33,13 +33,20 @@ class ProfileWidget extends ConsumerWidget {
                 children: [
                   Row(
                     children: [
-                      const Spacer(),
                       IconButton(
                         onPressed: () {
                           _showEditProfile(context);
                         },
                         icon: const Icon(Icons.edit_outlined),
                       ),
+                      const Spacer(),
+                      if (user?.role != null) ...[
+                        Wrap(
+                          spacing: kXSmall,
+                          runSpacing: -kMedium,
+                          children: _guilds(user),
+                        ),
+                      ],
                     ],
                   ),
                   const ProfileImageWidget(),
@@ -84,6 +91,25 @@ class ProfileWidget extends ConsumerWidget {
             ?.map(
               (e) => Chip(
                 label: Text(e.name?.name ?? ''),
+                labelPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: -4,
+                ),
+                padding: const EdgeInsets.all(0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(kMedium),
+                ),
+              ),
+            )
+            .toList() ??
+        [];
+  }
+
+  List<Widget> _guilds(UserEntity? user) {
+    return user?.guild
+            ?.map(
+              (e) => Chip(
+                label: Text(e.name?.guildName ?? ''),
                 labelPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
                   vertical: -4,

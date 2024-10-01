@@ -1,6 +1,35 @@
 # Mandali
 Church Management System - Open Source Project.
 
+# Build Status
+| Environment | Status  |
+| ----------- | ----------- |
+| Production  | [![Codemagic build status](https://api.codemagic.io/apps/66ce7c73fc5151e0782347a3/android_ios_build_prod/status_badge.svg)](https://codemagic.io/app/<app-id>/<workflow-id>/latest_build)         |
+| Staging     | [![Codemagic build status](https://api.codemagic.io/apps/66ce7c73fc5151e0782347a3/android_ios_build_qa/status_badge.svg)](https://codemagic.io/app/<app-id>/<workflow-id>/latest_build)           |
+| Development | [![Codemagic build status](https://api.codemagic.io/apps/66ce7c73fc5151e0782347a3/android_ios_build_dev/status_badge.svg)](https://codemagic.io/app/<app-id>/<workflow-id>/latest_build) |
+| Hotfix      | -      | 
+| Patch       | -       |
+
+
+# Projects
+
+| Project               | URL                                         |
+| --------------------- | ------------------------------------------- |
+| BE API (NestJS)       | https://github.com/rddewan/Mandali-Server   |
+| FE Admin (React)      | Comming Soon!                               |
+| FE Mobile (Flutter)   | https://github.com/rddewan/mandali-mobile   |
+
+
+# Git Branching
+
+| Environment | Git Branch  |
+| ----------- | ----------- |
+| Production  | main        |
+| Staging     | qa          |
+| Development | dev         |
+| Hotfix      | hotfix      | 
+| Patch       | patch       |
+
 ### Setup Flutter Version Management
 - Run below command to setup flutter version
 - Current version for this project is 3.22.2
@@ -39,13 +68,8 @@ fvm flutter pub run build_runner build -d
     ```bash 
     ./run_build_runner.sh
     ```
-### Setup Firebase Project
-*   ```
-    1. Create a 3 firebase project for development, QA/Staging, Production
-    2. For each Firebase Project enable Firebase Authentication Provider - Phone
-    ```
 
-### Set Up Android
+### Setup ENV
 *   Setup .env in packages/core 
     ```
     1. Rename .dev.env.example to .dev.env
@@ -53,6 +77,15 @@ fvm flutter pub run build_runner build -d
     3. Rename .prod.env.example to .dev.env
     4. Add the required values to the keys
     ```
+
+### Setup Firebase Project
+*   ```
+    1. Create a 3 firebase project for development, QA/Staging, Production
+    2. For each Firebase Project enable Firebase Authentication Provider - Phone
+    ```
+
+### Setup Android
+
 *   Android google-services.json
     1. Downlaod the google-services.json
     2. Add the download file to 
@@ -91,27 +124,76 @@ fvm flutter pub run build_runner build -d
         flutter.targetSdkVersion=34
         flutter.compileSdkVersion=34
         ``` 
+* `Note: If you want to publish the app to app store you need to change the package name`
+
+### Setup iOS
+
+*   iOS GoogleService-Info.plist
+    1. Downlaod the GoogleService-Info.plist
+    2. Add the download file to 
+    ``` 
+    ios/Runner/Dev
+    ios/Runner/QA
+    ios/Runner/Prod 
+    ```
+*   iOS Code Signing 
+    1. Login to your apple account and create a Certificate, Identifier, Provisioning Profile
+    2. Identifier should include a Push Notification
+    3. Download the Provisioning Profile and copy it to `/Users/YOUR-USER/Library/MobileDevice/Provisioning Profiles`
+    4. Open the project in XCode select `Runner->TARGETS->Runner->Build Phases->Firebase Crashlytics` and replace your `GOOGLE_APP_ID` from GoogleService-Info.plist
+    5. Configure `ios/export_options.plist` to match your signing config - Only required if you are using `shorebird` to build and patch locally 
+  
+* `Note: If you want to publish the app to app store you need to change the package name`
+
 
 #   Useful command
 
+## Flutter Build Android release app locally
+*  Build a Dev version 
+    ```bash
+    fvm flutter build apk --release --build-name=1.0.0 --build-number=1 --obfuscate --split-debug-info=build/app/symbols --flavor dev -t lib/main_dev.dart
+    ```    
+* Build QA version
+    ```bash
+    fvm flutter build appbundle --release --build-name=1.0.0 --build-number=1 --obfuscate --split-debug-info=build/app/symbols --flavor qa -t lib/main_qa.dart
+    ```
+* Build Prod version
+    ```bash
+    fvm flutter build appbundle --release --build-name=1.0.0 --build-number=1 --obfuscate --split-debug-info=build/app/symbols --flavor prod -t lib/main_prod.dart
+    ```
+
+## Flutter Build iOS release app locally
+* Build Dev version
+    ```bash
+    fvm flutter build ipa --release --obfuscate --split-debug-info=build/ios/symbols --flavor dev -t lib/main_dev.dart
+    ```
+* Build QA version
+    ```bash
+    fvm flutter build ipa --release  --obfuscate --split-debug-info=build/ios/symbols --build-name=1.0.0 --build-number=1 --flavor qa -t lib/main_qa.dart
+    ```
+* Build Prod version
+    ```bash
+    fvm flutter build ipa --release  --obfuscate --split-debug-info=build/ios/symbols  --build-name=1.0.0 --build-number=1 --flavor prod -t lib/main_prod.dart
+    ```
+    
 ### Shorebird
 * Build Flavor Dev
     ```bash
-    shorebird debug ios --build-name=1.0.0 --build-number=1  --flavor dev -t lib/main_dev.dart
+    shorebird debug ios --build-name=1.0.0 --build-number=1  --flavor dev --export-options-plist ios/export_options.plist -t lib/main_dev.dart
     ```
     ```bash
     shorebird debug android --build-name=1.0.0 --build-number=1  --flavor dev -t lib/main_dev.dart
     ```
 * Build Flavor QA
     ```bash
-    shorebird release ios --build-name=1.0.0 --build-number=1  --flavor qa -t lib/main_qa.dart
+    shorebird release ios --build-name=1.0.0 --build-number=1  --flavor qa --export-options-plist ios/export_options.plist -t lib/main_qa.dart
     ```
     ```bash
     shorebird release android --build-name=1.0.0 --build-number=1  --flavor qa -t lib/main_qa.dart
     ```
 * Build Flavor Prod
     ```bash
-    shorebird release ios --build-name=1.0.0 --build-number=1 --flavor prod -t lib/main_prod.dart
+    shorebird release ios --build-name=1.0.0 --build-number=1 --flavor prod --export-options-plist ios/export_options.plist -t lib/main_prod.dart
     ```
     ```bash
     shorebird release android --build-name=1.0.0 --build-number=1 --flavor prod -t lib/main_prod.dart
@@ -123,7 +205,14 @@ fvm flutter pub run build_runner build -d
     ```
 
     ```bash
+    shorebird patch --platforms=ios --flavor=prod --target=lib/main_prod.dart --release-version=1.0.0+1
+    ```
+
+    ```bash
     shorebird patch --platforms=android --flavor=prod --target=lib/main_prod.dart    
+    ```
+    ```bash
+    shorebird patch --platforms=ios --flavor=prod --target=lib/main_prod.dart    
     ```
 
 #### Git Hook

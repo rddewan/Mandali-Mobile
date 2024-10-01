@@ -137,104 +137,111 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
-                  path: '/',
-                  name: homeRoute,
-                  pageBuilder: (context, state) {
-                    return NoTransitionPage(
+                path: '/',
+                name: homeRoute,
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(
+                    key: state.pageKey,
+                    name: state.name,
+                    child: HomeScreen(
                       key: state.pageKey,
-                      name: state.name,
-                      child: HomeScreen(
+                    ),
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: createChurchServiceRoute,
+                    name: createChurchServiceRoute,
+                    pageBuilder: (context, state) {
+                      return CustomTransitionPage(
                         key: state.pageKey,
-                      ),
-                    );
-                  },
-                  routes: [
-                    GoRoute(
-                      path: createChurchServiceRoute,
-                      name: createChurchServiceRoute,
-                      pageBuilder: (context, state) {
-                        return CustomTransitionPage(
-                          key: state.pageKey,
-                          transitionsBuilder: (
-                            context,
-                            animation,
-                            secondaryAnimation,
-                            child,
-                          ) =>
-                              SlideTransition(
-                            position: animation.drive(Tween<Offset>(
+                        transitionsBuilder: (
+                          context,
+                          animation,
+                          secondaryAnimation,
+                          child,
+                        ) =>
+                            SlideTransition(
+                          position: animation.drive(
+                            Tween<Offset>(
                               begin: const Offset(0.8, 0.8),
                               end: Offset.zero,
-                            ).chain(CurveTween(curve: Curves.easeIn))),
-                            child: child,
+                            ).chain(CurveTween(curve: Curves.easeIn)),
                           ),
-                          child: CreateChurchServiceScreen(
-                            key: state.pageKey,
-                          ),
-                        );
-                      },
-                    ),
-                    GoRoute(
-                      path: '$editChurchServiceRoute/:id',
-                      name: editChurchServiceRoute,
-                      pageBuilder: (context, state) {
-                        final id = state.pathParameters['id'] ?? '';
-                        return CustomTransitionPage(
+                          child: child,
+                        ),
+                        child: CreateChurchServiceScreen(
                           key: state.pageKey,
-                          transitionDuration: const Duration(milliseconds: 500),
-                          reverseTransitionDuration:
-                              const Duration(milliseconds: 500),
-                          transitionsBuilder: (
-                            context,
-                            animation,
-                            secondaryAnimation,
-                            child,
-                          ) =>
-                              SlideTransition(
-                            position: animation.drive(Tween<Offset>(
+                        ),
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    path: '$editChurchServiceRoute/:id',
+                    name: editChurchServiceRoute,
+                    pageBuilder: (context, state) {
+                      final id = state.pathParameters['id'] ?? '';
+                      return CustomTransitionPage(
+                        key: state.pageKey,
+                        transitionDuration: const Duration(milliseconds: 500),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 500),
+                        transitionsBuilder: (
+                          context,
+                          animation,
+                          secondaryAnimation,
+                          child,
+                        ) =>
+                            SlideTransition(
+                          position: animation.drive(
+                            Tween<Offset>(
                               begin: const Offset(0.8, 0.8),
                               end: Offset.zero,
-                            ).chain(CurveTween(curve: Curves.easeIn))),
-                            child: child,
+                            ).chain(CurveTween(curve: Curves.easeIn)),
                           ),
-                          child: EditChurchServiceScreen(
-                            key: state.pageKey,
-                            id: int.parse(id),
-                          ),
-                        );
-                      },
-                    ),
-                    GoRoute(
-                      path: '$churchServiceDetailRoute/:id',
-                      name: churchServiceDetailRoute,
-                      pageBuilder: (context, state) {
-                        final id = state.pathParameters['id'] ?? '';
-                        return CustomTransitionPage(
+                          child: child,
+                        ),
+                        child: EditChurchServiceScreen(
                           key: state.pageKey,
-                          transitionDuration: const Duration(milliseconds: 500),
-                          reverseTransitionDuration:
-                              const Duration(milliseconds: 500),
-                          transitionsBuilder: (
-                            context,
-                            animation,
-                            secondaryAnimation,
-                            child,
-                          ) =>
-                              SlideTransition(
-                            position: animation.drive(Tween<Offset>(
+                          id: int.parse(id),
+                        ),
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    path: '$churchServiceDetailRoute/:id',
+                    name: churchServiceDetailRoute,
+                    pageBuilder: (context, state) {
+                      final id = state.pathParameters['id'] ?? '';
+                      return CustomTransitionPage(
+                        key: state.pageKey,
+                        transitionDuration: const Duration(milliseconds: 500),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 500),
+                        transitionsBuilder: (
+                          context,
+                          animation,
+                          secondaryAnimation,
+                          child,
+                        ) =>
+                            SlideTransition(
+                          position: animation.drive(
+                            Tween<Offset>(
                               begin: const Offset(0.8, 0.8),
                               end: Offset.zero,
-                            ).chain(CurveTween(curve: Curves.easeIn))),
-                            child: child,
+                            ).chain(CurveTween(curve: Curves.easeIn)),
                           ),
-                          child: ChurchServiceDetailScreen(
-                            key: state.pageKey,
-                            id: int.parse(id),
-                          ),
-                        );
-                      },
-                    ),
-                  ]),
+                          child: child,
+                        ),
+                        child: ChurchServiceDetailScreen(
+                          key: state.pageKey,
+                          id: int.parse(id),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
 
@@ -242,49 +249,52 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
-                  path: '/$memberRoute',
-                  name: memberRoute,
-                  pageBuilder: (context, state) {
-                    return NoTransitionPage(
+                path: '/$memberRoute',
+                name: memberRoute,
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(
+                    key: state.pageKey,
+                    name: state.name,
+                    child: MemberScreen(
                       key: state.pageKey,
-                      name: state.name,
-                      child: MemberScreen(
+                    ),
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: '$memberDetailRoute/:id',
+                    name: memberDetailRoute,
+                    pageBuilder: (context, state) {
+                      final id = state.pathParameters['id'] ?? '';
+                      return CustomTransitionPage(
                         key: state.pageKey,
-                      ),
-                    );
-                  },
-                  routes: [
-                    GoRoute(
-                      path: '$memberDetailRoute/:id',
-                      name: memberDetailRoute,
-                      pageBuilder: (context, state) {
-                        final id = state.pathParameters['id'] ?? '';
-                        return CustomTransitionPage(
-                          key: state.pageKey,
-                          transitionDuration: const Duration(milliseconds: 500),
-                          reverseTransitionDuration:
-                              const Duration(milliseconds: 500),
-                          transitionsBuilder: (
-                            context,
-                            animation,
-                            secondaryAnimation,
-                            child,
-                          ) =>
-                              SlideTransition(
-                            position: animation.drive(Tween<Offset>(
+                        transitionDuration: const Duration(milliseconds: 500),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 500),
+                        transitionsBuilder: (
+                          context,
+                          animation,
+                          secondaryAnimation,
+                          child,
+                        ) =>
+                            SlideTransition(
+                          position: animation.drive(
+                            Tween<Offset>(
                               begin: const Offset(0.8, 0.8),
                               end: Offset.zero,
-                            ).chain(CurveTween(curve: Curves.easeIn))),
-                            child: child,
+                            ).chain(CurveTween(curve: Curves.easeIn)),
                           ),
-                          child: MemberDetailScreen(
-                            key: state.pageKey,
-                            id: int.parse(id),
-                          ),
-                        );
-                      },
-                    ),
-                  ]),
+                          child: child,
+                        ),
+                        child: MemberDetailScreen(
+                          key: state.pageKey,
+                          id: int.parse(id),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
 
@@ -311,67 +321,72 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
-                  path: '/$settingRoute',
-                  name: settingRoute,
-                  pageBuilder: (context, state) {
-                    return NoTransitionPage(
+                path: '/$settingRoute',
+                name: settingRoute,
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(
+                    key: state.pageKey,
+                    name: state.name,
+                    child: SettingScreen(
                       key: state.pageKey,
-                      name: state.name,
-                      child: SettingScreen(
-                        key: state.pageKey,
-                      ),
-                    );
-                  },
-                  routes: [
-                    GoRoute(
-                      path: languageRoute,
-                      name: languageRoute,
-                      pageBuilder: (context, state) {
-                        return CustomTransitionPage(
-                          key: state.pageKey,
-                          transitionDuration: const Duration(milliseconds: 500),
-                          reverseTransitionDuration:
-                              const Duration(milliseconds: 500),
-                          transitionsBuilder:
-                              (context, animation, secondaryAnimation, child) =>
-                                  SlideTransition(
-                            position: animation.drive(Tween<Offset>(
-                              begin: const Offset(0.8, 0.8),
-                              end: Offset.zero,
-                            ).chain(CurveTween(curve: Curves.easeIn))),
-                            child: child,
-                          ),
-                          child: LanguagePickerScreen(
-                            key: state.pageKey,
-                          ),
-                        );
-                      },
                     ),
-                    GoRoute(
-                      path: themeRoute,
-                      name: themeRoute,
-                      pageBuilder: (context, state) {
-                        return CustomTransitionPage(
-                          key: state.pageKey,
-                          transitionDuration: const Duration(milliseconds: 500),
-                          reverseTransitionDuration:
-                              const Duration(milliseconds: 500),
-                          transitionsBuilder:
-                              (context, animation, secondaryAnimation, child) =>
-                                  SlideTransition(
-                            position: animation.drive(Tween<Offset>(
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: languageRoute,
+                    name: languageRoute,
+                    pageBuilder: (context, state) {
+                      return CustomTransitionPage(
+                        key: state.pageKey,
+                        transitionDuration: const Duration(milliseconds: 500),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 500),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) =>
+                                SlideTransition(
+                          position: animation.drive(
+                            Tween<Offset>(
                               begin: const Offset(0.8, 0.8),
                               end: Offset.zero,
-                            ).chain(CurveTween(curve: Curves.easeIn))),
-                            child: child,
+                            ).chain(CurveTween(curve: Curves.easeIn)),
                           ),
-                          child: ThemePickerScreen(
-                            key: state.pageKey,
+                          child: child,
+                        ),
+                        child: LanguagePickerScreen(
+                          key: state.pageKey,
+                        ),
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    path: themeRoute,
+                    name: themeRoute,
+                    pageBuilder: (context, state) {
+                      return CustomTransitionPage(
+                        key: state.pageKey,
+                        transitionDuration: const Duration(milliseconds: 500),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 500),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) =>
+                                SlideTransition(
+                          position: animation.drive(
+                            Tween<Offset>(
+                              begin: const Offset(0.8, 0.8),
+                              end: Offset.zero,
+                            ).chain(CurveTween(curve: Curves.easeIn)),
                           ),
-                        );
-                      },
-                    )
-                  ]),
+                          child: child,
+                        ),
+                        child: ThemePickerScreen(
+                          key: state.pageKey,
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
         ],

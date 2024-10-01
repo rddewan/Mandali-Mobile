@@ -45,6 +45,7 @@ class UserDto with _$UserDto {
     @JsonKey(name: "phoneNumber") String? phoneNumber,
     @JsonKey(name: "photo") String? photo,
     @JsonKey(name: "role") required List<RoleDto> role,
+    @JsonKey(name: "guild") required List<GuildDto> guild,
     @JsonKey(name: "church") required ChurchDto church,
   }) = _UserDto;
 
@@ -61,6 +62,17 @@ class RoleDto with _$RoleDto {
 
   factory RoleDto.fromJson(Map<String, dynamic> json) =>
       _$RoleDtoFromJson(json);
+}
+
+@freezed
+class GuildDto with _$GuildDto {
+  const factory GuildDto({
+    @JsonKey(name: "id") required int id,
+    @JsonKey(name: "name") required UserGuild name,
+  }) = _GuildDto;
+
+  factory GuildDto.fromJson(Map<String, dynamic> json) =>
+      _$GuildDtoFromJson(json);
 }
 
 @freezed
