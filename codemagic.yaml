@@ -194,7 +194,7 @@ workflows:
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
           --flavor dev -t lib/main_dev.dart \
-          --export-options-plist=$HOME/export_options.plist \
+          --export-options-plist=/Users/builder/export_options.plist \
           --obfuscate --split-debug-info=build/ios/symbols
 
 
@@ -305,7 +305,7 @@ workflows:
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
           --flavor qa -t lib/main_qa.dart \
-          -- --export-options-plist=$HOME/export_options.plist
+          -- --export-options-plist=/Users/builder/export_options.plist
 
 
     artifacts:      
@@ -440,7 +440,7 @@ workflows:
           --build-name=1.0.0 \
           --build-number=$BUILD_NUMBER  \
           --flavor prod -t lib/main_prod.dart \
-          -- --export-options-plist=$HOME/export_options.plist         
+          -- --export-options-plist=/Users/builder/export_options.plist        
 
 
     artifacts:      

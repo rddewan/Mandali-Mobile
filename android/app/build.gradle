@@ -6,6 +6,7 @@ plugins {
     id "com.google.gms.google-services"
 }
 
+// Reads local.properties file and returns its contents as a Properties object
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
@@ -24,14 +25,6 @@ if (flutterVersionName == null) {
     flutterVersionName = "1.0"
 }
 
-def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('key.properties')
-if (keystorePropertiesFile.exists()) {
-    keystorePropertiesFile.withReader('UTF-8') { reader ->
-        keystoreProperties.load(reader)
-    }
-}
-
 def flutterCompileSdkVersion = localProperties.getProperty('flutter.compileSdkVersion')
 if (flutterCompileSdkVersion == null) {
     flutterCompileSdkVersion = 34
@@ -45,6 +38,15 @@ if (flutterMinSdkVersion == null) {
 def flutterTargetSdkVersion = localProperties.getProperty('flutter.targetSdkVersion')
 if (flutterTargetSdkVersion == null) {
     flutterTargetSdkVersion = 34
+}
+
+// Reads keystore.properties file and returns its contents as a Properties object
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withReader('UTF-8') { reader ->
+        keystoreProperties.load(reader)
+    }
 }
 
 android {
