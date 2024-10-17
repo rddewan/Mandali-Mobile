@@ -45,6 +45,8 @@ part 'providers/setting_provider.dart';
 
 part 'remote/network_service.dart';
 part 'remote/network_service_interceptor.dart';
+part 'remote/token/token_service.dart';
+part 'remote/token/itoken_service.dart';
 
 part 'route/go_router_notifier.dart';
 part 'route/route_observer_provider.dart';
