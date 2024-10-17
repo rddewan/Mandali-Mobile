@@ -1,31 +1,25 @@
 part of core;
 
+final networkServiceInterceptorProvider =
+    Provider.family<NetworkServiceInterceptor, Dio>((ref, dio) {
+  final tokenService = ref.watch(tokenServiceProvider(dio));
+  return NetworkServiceInterceptor(tokenService, dio);
+});
+
 class NetworkServiceInterceptor extends Interceptor {
+  final ITokenService _tokenService;
   final Dio _dio;
-  final ISecureStorage _secureStorage;
-  final String refreshTokenPath = '/api/v1/auth/refresh';
 
-  NetworkServiceInterceptor(this._dio, this._secureStorage);
-
-  Future<void> _clearAuthTokens() async {
-    Future.wait([
-      _secureStorage.delete(churchIdKey),
-      _secureStorage.delete(accessTokenKey),
-      _secureStorage.delete(refreshTokenKey),
-    ]);
-  }
-
-  void _setAuthTokens(String accessToken, String refreshToken) async {
-    await _secureStorage.write(accessTokenKey, accessToken);
-    await _secureStorage.write(refreshTokenKey, refreshToken);
-  }
+  NetworkServiceInterceptor(this._tokenService, this._dio);
 
   @override
   void onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final accessToken = await _secureStorage.read(accessTokenKey);
+    // Get access token
+    final accessToken = await _tokenService.getAccessToken();
+
     options.headers['Accept'] = 'application/json';
     options.headers['Accept-Language'] = 'en';
     options.headers['Authorization'] = 'Bearer $accessToken';
@@ -36,40 +30,29 @@ class NetworkServiceInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     // Handle unauthorized error
-    if (err.response?.statusCode == 401) {
-      final token = await _secureStorage.read(refreshTokenKey);
+    if (err.response?.statusCode == unauthorized) {
+      final token = await _tokenService.getRefreshToken();
 
       try {
-        final response = await _dio.post<Map<String, dynamic>>(
-          refreshTokenPath,
-          data: {
-            "refreshToken": token,
-          },
-        );
+        final result = await _tokenService.refreshToken(token);
 
-        final json = response.data;
-        final result = RefreshTokenResponse.fromJson(json ?? {});
+        final accessToken = result.data.accessToken;
+        final refreshToken = result.data.refreshToken;
 
-        final statusCode = response.statusCode;
+        // store token in secure storage
+        _tokenService.storeAccessToken(accessToken, refreshToken);
 
-        if (statusCode == success) {
-          final accessToken = result.data.accessToken;
-          final refreshToken = result.data.refreshToken;
-          // store token in secure storage
-          _setAuthTokens(accessToken, refreshToken);
-
-          final options = err.requestOptions;
-          //// Update the request header with the new access token
-          options.headers['Authorization'] = 'Bearer $accessToken';
-          // Repeat the request with the updated header
-          return handler.resolve(await _dio.fetch(options));
-        }
+        final options = err.requestOptions;
+        //// Update the request header with the new access token
+        options.headers['Authorization'] = 'Bearer $accessToken';
+        // Repeat the request with the updated header
+        return handler.resolve(await _dio.fetch(options));
       } on DioException catch (e) {
         // if refresh token is expired
         if (e.response?.statusCode == refreshTokenExpired) {
-          await _clearAuthTokens();
+          await _tokenService.clearTokens();
           // refresh token expired - set status code 498
-          err.response?.statusCode = refreshTokenExpired;
+          // err.response?.statusCode = refreshTokenExpired;
 
           return handler.next(err);
         }

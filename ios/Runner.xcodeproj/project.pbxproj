@@ -804,6 +804,7 @@
 				APP_DISPLAY_NAME = "Mandali Dev";
 				ASSET_PREFIX = dev;
 				BUNDLE_NAME = "Mandali DEV";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -902,6 +903,7 @@
 				APP_DISPLAY_NAME = "Mandali QA";
 				ASSET_PREFIX = qa;
 				BUNDLE_NAME = "Mandali QA";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FCUZNYGQMQ;
@@ -997,6 +999,7 @@
 				APP_DISPLAY_NAME = "Mandali QA";
 				ASSET_PREFIX = qa;
 				BUNDLE_NAME = "Mandali QA";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FCUZNYGQMQ;
@@ -1092,6 +1095,7 @@
 				APP_DISPLAY_NAME = "Mandali QA";
 				ASSET_PREFIX = qa;
 				BUNDLE_NAME = "Mandali QA";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FCUZNYGQMQ;
@@ -1111,6 +1115,7 @@
 			buildSettings = {
 				APP_DISPLAY_NAME = "Mandali Dev";
 				BUNDLE_NAME = MandaliDEV;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = F86H3NTCG9;
@@ -1132,6 +1137,7 @@
 			buildSettings = {
 				APP_DISPLAY_NAME = "Mandali Dev";
 				BUNDLE_NAME = "Mandali DEV";
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1153,6 +1159,7 @@
 			baseConfigurationReference = DCEA472079C6DAF5E675038C /* Pods-Runner.debug-prod.xcconfig */;
 			buildSettings = {
 				APP_DISPLAY_NAME = Mandali;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FCUZNYGQMQ;
@@ -1171,6 +1178,7 @@
 			baseConfigurationReference = 5ECCF7383730F8AA826611DD /* Pods-Runner.profile-prod.xcconfig */;
 			buildSettings = {
 				APP_DISPLAY_NAME = Mandali;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FCUZNYGQMQ;
@@ -1189,6 +1197,7 @@
 			baseConfigurationReference = 762307E0455B8C817E01E7C6 /* Pods-Runner.release-prod.xcconfig */;
 			buildSettings = {
 				APP_DISPLAY_NAME = Mandali;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = FCUZNYGQMQ;

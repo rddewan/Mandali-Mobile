@@ -6,7 +6,7 @@ class BaseLoadingIndicator extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Center(
-      child: LoadingAnimationWidget.prograssiveDots(
+      child: LoadingAnimationWidget.progressiveDots(
         color: context.isDarkMode
             ? context.themeColor.primaryColorLight
             : context.themeColor.primaryColor,

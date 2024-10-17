@@ -5,7 +5,7 @@ publish_to: none
 homepage:
 
 environment:
-  sdk: '>=3.4.3 <4.0.0'
+  sdk: '>=3.5.3 <4.0.0'
   flutter: ">=1.17.0"
 
 
@@ -14,13 +14,15 @@ dependencies:
     sdk: flutter
   account: 
     path: ../account
+  # https://pub.dev/packages/flutter_riverpod
   flutter_riverpod: ^2.5.1
-  go_router: ^14.2.1
+  # https://pub.dev/packages/go_router
+  go_router: ^14.3.0
   # https://pub.dev/packages/retrofit
-  retrofit: ^4.2.0
-  dio: ^5.5.0+1  
+  retrofit: ^4.4.1
+  dio: ^5.7.0  
   # https://pub.dev/packages/upgrader
-  upgrader: ^10.3.0
+  upgrader: ^11.2.0
   # https://pub.dev/packages/logger
   logger: ^2.4.0
   # https://pub.dev/packages/dio_http_formatter
@@ -30,21 +32,21 @@ dependencies:
   # https://pub.dev/packages/json_annotation
   json_annotation: ^4.9.0
   # https://pub.dev/packages/firebase_core
-  firebase_core: ^3.2.0
+  firebase_core: ^3.6.0
   # https://pub.dev/packages/firebase_auth
-  firebase_auth: ^5.1.2 
+  firebase_auth: ^5.3.1 
   # https://pub.dev/packages/firebase_crashlytics
-  firebase_crashlytics: ^4.0.3
+  firebase_crashlytics: ^4.1.3
   # https://pub.dev/packages/firebase_analytics
-  firebase_analytics: ^11.2.0
+  firebase_analytics: ^11.3.3
   # https://pub.dev/packages/firebase_messaging
-  firebase_messaging: ^15.0.3
+  firebase_messaging: ^15.1.3
   # https://pub.dev/packages/firebase_performance
   firebase_performance: ^0.10.0
   # https://pub.dev/packages/firebase_remote_config
-  firebase_remote_config: ^5.0.3
+  firebase_remote_config: ^5.1.3
   # https://pub.dev/packages/flutter_local_notifications
-  flutter_local_notifications: ^17.2.1
+  flutter_local_notifications: ^17.2.3
   # https://pub.dev/packages/pinput
   pinput: ^5.0.0
   # https://pub.dev/packages/multiple_result
@@ -56,15 +58,15 @@ dependencies:
   # https://pub.dev/packages/connectivity_plus
   connectivity_plus: ^6.0.5
   # https://pub.dev/packages/internet_connection_checker
-  internet_connection_checker: ^2.0.0
+  internet_connection_checker: ^1.0.0 
   # https://pub.dev/packages/envied
   envied: ^0.5.4+1
   # https://pub.dev/packages/cached_network_image/
-  cached_network_image: ^3.3.1
+  cached_network_image: ^3.4.1
   # https://pub.dev/packages/flutter_cache_manager/
-  flutter_cache_manager: ^3.3.2
+  flutter_cache_manager: ^3.4.1
   #https://pub.dev/packages/loading_animation_widget
-  loading_animation_widget: ^1.2.1
+  loading_animation_widget: ^1.3.0
   #https://pub.dev/packages/google_fonts/
   google_fonts: ^6.2.1
   # https://pub.dev/packages/flutter_styled_toast
@@ -76,7 +78,7 @@ dependencies:
   # https://pub.dev/packages/flutter_svg
   flutter_svg: ^2.0.10+1
   # https://pub.dev/packages/loader_overlay
-  loader_overlay: ^4.0.0
+  loader_overlay: ^4.0.2
   # https://pub.dev/packages/timezone/install
   timezone: ^0.9.4
   # https://pub.dev/packages/isar

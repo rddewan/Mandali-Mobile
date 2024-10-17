@@ -2,7 +2,6 @@ part of core;
 
 final networkServiceProvider = Provider<Dio>((ref) {
   final envReader = ref.watch(envReaderProvider);
-  final secureStorage = ref.watch(secureStorageProvider);
 
   final options = BaseOptions(
     baseUrl: envReader.getBaseUrl(),
@@ -12,10 +11,12 @@ final networkServiceProvider = Provider<Dio>((ref) {
   );
 
   final dio = Dio(options);
+  final networkServiceInterceptor =
+      ref.watch(networkServiceInterceptorProvider(dio));
 
   dio.interceptors.addAll([
     HttpFormatter(),
-    NetworkServiceInterceptor(dio, secureStorage),
+    networkServiceInterceptor,
   ]);
 
   final isCertificatePinning = envReader.getIsCertificatePinning();

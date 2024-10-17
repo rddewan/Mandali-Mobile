@@ -1,6 +1,9 @@
 # Mandali
 Church Management System - Open Source Project.
 
+# Flutter Course
+* [https://mobileacademy/course](https://mobileacademy.io/courses/)
+
 # Build Status
 | Environment | Status  |
 | ----------- | ----------- |
@@ -13,11 +16,11 @@ Church Management System - Open Source Project.
 
 # Projects
 
-| Project               | URL                                         |
-| --------------------- | ------------------------------------------- |
-| BE API (NestJS)       | https://github.com/rddewan/Mandali-Server   |
-| FE Admin (React)      | Comming Soon!                               |
-| FE Mobile (Flutter)   | https://github.com/rddewan/mandali-mobile   |
+| Project               | URL                                            |
+| --------------------- | ---------------------------------------------- |
+| BE API (NestJS)       | https://github.com/rddewan/Mandali-Server      |
+| FE Admin (React)      | https://github.com/rddewan/Mandali-Admin-Panel |
+| FE Mobile (Flutter)   | https://github.com/rddewan/Mandali-Mobile      |
 
 
 # Git Branching
@@ -37,10 +40,10 @@ Church Management System - Open Source Project.
 
 ```
 # install the flutter version using fvm
-fvm install 3.24.1
+fvm install 3.24.3
 
 # select the flutter version for current project
-fvm use 3.24.1
+fvm use 3.24.3
 
 # use fvm command to proxy your flutter command
 fvm flutter pub get
