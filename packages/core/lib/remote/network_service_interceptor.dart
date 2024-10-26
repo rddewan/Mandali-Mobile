@@ -30,7 +30,7 @@ class NetworkServiceInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     // Handle unauthorized error
-    if (err.response?.statusCode == 401) {
+    if (err.response?.statusCode == unauthorized) {
       final token = await _tokenService.getRefreshToken();
 
       try {
