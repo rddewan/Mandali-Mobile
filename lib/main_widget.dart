@@ -73,7 +73,6 @@ class _MainWidgetState extends ConsumerState<MainWidget> {
               ),
             ),
             child: LoaderOverlay(
-              useDefaultLoading: false,
               overlayColor: Colors.transparent,
               overlayWidgetBuilder: (_) => const BaseLoadingIndicator(),
               child: child!,

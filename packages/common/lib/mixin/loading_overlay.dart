@@ -10,7 +10,7 @@ mixin LoadingOverlay {
         return RepaintBoundary(
           child: AbsorbPointer(
             child: Center(
-              child: LoadingAnimationWidget.prograssiveDots(
+              child: LoadingAnimationWidget.progressiveDots(
                 color: Theme.of(context).primaryColor,
                 size: 60,
               ),
