@@ -15,7 +15,7 @@ dependencies:
   account: 
     path: ../account
   # https://pub.dev/packages/flutter_riverpod
-  flutter_riverpod: ^2.5.1
+  flutter_riverpod: ^2.6.1
   # https://pub.dev/packages/go_router
   go_router: ^14.3.0
   # https://pub.dev/packages/retrofit
@@ -102,15 +102,15 @@ dev_dependencies:
   retrofit_generator: '>=8.1.2'
   json_serializable: '^6.8.0'
   freezed: ^2.5.7
-  riverpod_generator: ^2.4.2
-  riverpod_lint: ^2.3.12
+  riverpod_generator: ^2.6.1
+  riverpod_lint: ^2.6.1
   custom_lint: ^0.6.4
   flutter_gen_runner: ^5.4.0
   flutter_translation_sheet: ^1.0.33-dev.1
 
 dependency_overrides: 
   meta: 1.15.0
-
+  
 flutter_gen:
   output: lib/gen/ # Optional (default: lib/gen/)
   line_length: 80 # Optional (default: 80)
