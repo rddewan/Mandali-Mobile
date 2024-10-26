@@ -36,7 +36,7 @@ analyzer:
     sort_child_properties_last: warning
     no_leading_underscores_for_local_identifiers: info
     use_string_in_part_of_directives: ignore
-    
+       
 
    
 linter:
